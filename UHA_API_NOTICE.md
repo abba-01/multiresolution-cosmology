@@ -7,7 +7,7 @@ The **Universal Horizon Address (UHA)** multi-resolution encoding system is **pa
 ### Access Options
 
 **1. API Access (Public)**
-- Production API: `https://api.aybllc.org/v1/uha/encode`
+- Production API: `https://api.gitgap.org/v1/uha/encode`
 - Test endpoint: `https://got.gitgap.org/uha/encode`
 - Free tier: 1000 requests/month
 - Documentation: https://api.aybllc.org/docs
