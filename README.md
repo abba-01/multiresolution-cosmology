@@ -8,9 +8,21 @@
 
 ---
 
+## ⚠️ Important: Patent-Protected Technology
+
+**The Universal Horizon Address (UHA) encoding system is patent-protected intellectual property.**
+
+- The core UHA encoder implementation is **NOT included** in this public repository
+- Access is provided via **API only**: https://api.aybllc.org/v1/uha/encode
+- See [UHA_API_NOTICE.md](UHA_API_NOTICE.md) for licensing and API usage details
+
+---
+
 ## Overview
 
 This repository implements a multi-resolution framework for resolving cosmological tensions without invoking new physics. By encoding spatial positions in a Universal Horizon Address (UHA) system with variable precision, we systematically identify and correct scale-dependent astrophysical systematics.
+
+**Note**: This repository contains the analysis framework, validation methods, and scientific results. The UHA encoding engine itself is accessed via API (patent-protected).
 
 ### Key Results
 
@@ -129,10 +141,10 @@ Convergence metric: **ΔT < 0.15** indicates systematic origin (not fundamental 
 
 ```
 ├── Core Implementation
-│   ├── multiresolution_uha_encoder.py    # UHA encoding
-│   ├── epistemic_distance.py             # ΔT metric
-│   ├── h0_multiresolution_refinement.py  # H₀ analysis
-│   └── s8_multiresolution_refinement.py  # S₈ analysis
+│   ├── UHA_API_NOTICE.md                 # Patent & API access info
+│   ├── real_data_validation.py           # Validation framework
+│   ├── s8_multiresolution_refinement.py  # S₈ analysis
+│   └── s8_tension_resolution.py          # S₈ systematics
 │
 ├── Validation
 │   ├── test_implementation.py            # Core tests (80% pass)
@@ -155,34 +167,48 @@ Convergence metric: **ΔT < 0.15** indicates systematic origin (not fundamental 
 
 ## Usage Example
 
-```python
-from multiresolution_uha_encoder import encode_uha_with_variable_resolution
+### Using the UHA API
 
-# Encode NGC 4258 maser at 32-bit resolution (3.3 pc cells)
-uha = encode_uha_with_variable_resolution(
+```python
+import requests
+
+# Get your API key from https://api.aybllc.org/signup
+API_KEY = "your_api_key_here"
+
+def encode_position(ra_deg, dec_deg, distance_mpc, resolution_bits):
+    """Encode position using UHA API"""
+    response = requests.post(
+        'https://api.aybllc.org/v1/uha/encode',
+        json={
+            'ra_deg': ra_deg,
+            'dec_deg': dec_deg,
+            'distance_mpc': distance_mpc,
+            'resolution_bits': resolution_bits,
+            'scale_factor': 1.0,
+            'cosmo_params': {
+                'h0': 67.36,
+                'omega_m': 0.315,
+                'omega_lambda': 0.685
+            }
+        },
+        headers={'Authorization': f'Bearer {API_KEY}'}
+    )
+    return response.json()
+
+# Encode NGC 4258 maser at 32-bit resolution
+result = encode_position(
     ra_deg=184.74,
     dec_deg=47.30,
     distance_mpc=7.60,
-    scale_factor=1.0,
-    cosmo_params={'h0': 73.0, 'omega_m': 0.30, 'omega_lambda': 0.70},
-    morton_bits=32
+    resolution_bits=32
 )
 
-print(f"Cell size: {uha.cell_size_mpc * 1000:.1f} pc")
+print(f"UHA Code: {result['uha_code']}")
+print(f"Cell size: {result['cell_size_mpc'] * 1000:.1f} pc")
 # Output: Cell size: 3.3 pc
-
-# Compute epistemic distance
-from epistemic_distance import compute_epistemic_distance
-
-delta_T = compute_epistemic_distance(
-    planck_chain, shes_chain, resolution_bits=24
-)
-
-if delta_T < 0.15:
-    print("✅ Convergence: systematic origin confirmed")
-else:
-    print("❌ No convergence: fundamental physics discrepancy")
 ```
+
+See [UHA_API_NOTICE.md](UHA_API_NOTICE.md) for full API documentation.
 
 ---
 
