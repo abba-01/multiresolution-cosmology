@@ -14,7 +14,7 @@
 
 - The core UHA encoder implementation is **NOT included** in this public repository
 - Access is provided via **API only**:
-  - **Production**: https://api.aybllc.org/v1/uha/encode
+  - **Production**: https://api.gitgap.org/v1/uha/encode
   - **Test**: https://got.gitgap.org/uha/encode
 - **Get API Keys**:
   - Web form: https://tot.allyourbaseline.com/multiresolution-uha-api
