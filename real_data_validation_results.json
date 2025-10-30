@@ -1,0 +1,260 @@
+{
+  "run_id": "311d4b5223b0ed88",
+  "config": {
+    "resolution_schedule": [
+      8,
+      12,
+      16,
+      20,
+      24
+    ],
+    "cosmo_params": {
+      "h0": 67.36,
+      "omega_m": 0.315,
+      "omega_lambda": 0.685
+    },
+    "surveys": [
+      "KiDS-1000",
+      "DES-Y3",
+      "HSC-Y3"
+    ],
+    "code_version": "v1.0.0-stub"
+  },
+  "surveys": {
+    "KiDS-1000": {
+      "survey": "KiDS-1000",
+      "S8_initial": 0.759,
+      "sigma_S8_initial": 0.024,
+      "bins": [
+        {
+          "bin_index": 0,
+          "z_bin": [
+            0.1,
+            0.3
+          ],
+          "z_effective": 0.2,
+          "delta_S8": 0.005666666666666667,
+          "resolution_schedule": [
+            8,
+            12,
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "bin_index": 1,
+          "z_bin": [
+            0.3,
+            0.5
+          ],
+          "z_effective": 0.4,
+          "delta_S8": 0.004857142857142858,
+          "resolution_schedule": [
+            8,
+            12,
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "bin_index": 2,
+          "z_bin": [
+            0.5,
+            0.7
+          ],
+          "z_effective": 0.6,
+          "delta_S8": 0.00425,
+          "resolution_schedule": [
+            8,
+            12,
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "bin_index": 3,
+          "z_bin": [
+            0.7,
+            0.9
+          ],
+          "z_effective": 0.8,
+          "delta_S8": 0.0037777777777777783,
+          "resolution_schedule": [
+            8,
+            12,
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "bin_index": 4,
+          "z_bin": [
+            0.9,
+            1.2
+          ],
+          "z_effective": 1.05,
+          "delta_S8": 0.0033170731707317077,
+          "resolution_schedule": [
+            8,
+            12,
+            16,
+            20,
+            24
+          ]
+        }
+      ],
+      "S8_final": 0.7633737320944638,
+      "delta_S8_total": 0.004373732094463789
+    },
+    "DES-Y3": {
+      "survey": "DES-Y3",
+      "S8_initial": 0.776,
+      "sigma_S8_initial": 0.017,
+      "bins": [
+        {
+          "bin_index": 0,
+          "z_bin": [
+            0.2,
+            0.4
+          ],
+          "z_effective": 0.30000000000000004,
+          "delta_S8": 0.006538461538461538,
+          "resolution_schedule": [
+            8,
+            12,
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "bin_index": 1,
+          "z_bin": [
+            0.4,
+            0.6
+          ],
+          "z_effective": 0.5,
+          "delta_S8": 0.005666666666666667,
+          "resolution_schedule": [
+            8,
+            12,
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "bin_index": 2,
+          "z_bin": [
+            0.6,
+            0.85
+          ],
+          "z_effective": 0.725,
+          "delta_S8": 0.0049275362318840586,
+          "resolution_schedule": [
+            8,
+            12,
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "bin_index": 3,
+          "z_bin": [
+            0.85,
+            1.05
+          ],
+          "z_effective": 0.95,
+          "delta_S8": 0.00435897435897436,
+          "resolution_schedule": [
+            8,
+            12,
+            16,
+            20,
+            24
+          ]
+        }
+      ],
+      "S8_final": 0.7813729096989966,
+      "delta_S8_total": 0.00537290969899662
+    },
+    "HSC-Y3": {
+      "survey": "HSC-Y3",
+      "S8_initial": 0.763,
+      "sigma_S8_initial": 0.02,
+      "bins": [
+        {
+          "bin_index": 0,
+          "z_bin": [
+            0.3,
+            0.6
+          ],
+          "z_effective": 0.44999999999999996,
+          "delta_S8": 0.005862068965517242,
+          "resolution_schedule": [
+            8,
+            12,
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "bin_index": 1,
+          "z_bin": [
+            0.6,
+            0.9
+          ],
+          "z_effective": 0.75,
+          "delta_S8": 0.004857142857142858,
+          "resolution_schedule": [
+            8,
+            12,
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "bin_index": 2,
+          "z_bin": [
+            0.9,
+            1.2
+          ],
+          "z_effective": 1.05,
+          "delta_S8": 0.004146341463414635,
+          "resolution_schedule": [
+            8,
+            12,
+            16,
+            20,
+            24
+          ]
+        },
+        {
+          "bin_index": 3,
+          "z_bin": [
+            1.2,
+            1.5
+          ],
+          "z_effective": 1.35,
+          "delta_S8": 0.003617021276595745,
+          "resolution_schedule": [
+            8,
+            12,
+            16,
+            20,
+            24
+          ]
+        }
+      ],
+      "S8_final": 0.7676206436406676,
+      "delta_S8_total": 0.00462064364066761
+    }
+  }
+}
