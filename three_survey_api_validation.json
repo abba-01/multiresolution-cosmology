@@ -1,0 +1,233 @@
+{
+  "timestamp": "2025-10-30T21:24:07.942019+00:00",
+  "analysis_type": "three_survey_h32_api_validation",
+  "api_endpoints": {
+    "token": "https://got.gitgap.org/api/request-token",
+    "uha_encode": "https://got.gitgap.org/uha/encode"
+  },
+  "surveys": {
+    "kids": {
+      "survey": "KiDS-1000",
+      "telescope": "VST/ESO",
+      "area_deg2": 1000,
+      "n_bins": 5,
+      "resolution_schedule": [
+        8,
+        16,
+        24,
+        32
+      ],
+      "S8_initial": 0.759,
+      "S8_final": 0.7751665961308107,
+      "total_correction": 0.016166596130810725,
+      "bin_results": [
+        {
+          "bin_number": 1,
+          "z_eff": 0.1,
+          "z_min": 0.1,
+          "z_max": 0.3,
+          "S8_initial": 0.759,
+          "z_factor": 0.9534625892455922,
+          "correction": 0.019069251784911846,
+          "S8_final": 0.7780692517849118,
+          "uha_sample": "uha://h32::planck18::bin1_z0.10::DEMO"
+        },
+        {
+          "bin_number": 2,
+          "z_eff": 0.4,
+          "z_min": 0.3,
+          "z_max": 0.5,
+          "S8_initial": 0.759,
+          "z_factor": 0.8451542547285166,
+          "correction": 0.016903085094570332,
+          "S8_final": 0.7759030850945703,
+          "uha_sample": "uha://h32::planck18::bin2_z0.40::DEMO"
+        },
+        {
+          "bin_number": 3,
+          "z_eff": 0.6,
+          "z_min": 0.5,
+          "z_max": 0.7,
+          "S8_initial": 0.759,
+          "z_factor": 0.7905694150420948,
+          "correction": 0.015811388300841896,
+          "S8_final": 0.774811388300842,
+          "uha_sample": "uha://h32::planck18::bin3_z0.60::DEMO"
+        },
+        {
+          "bin_number": 4,
+          "z_eff": 0.8,
+          "z_min": 0.7,
+          "z_max": 0.9,
+          "S8_initial": 0.759,
+          "z_factor": 0.7453559924999299,
+          "correction": 0.014907119849998597,
+          "S8_final": 0.7739071198499986,
+          "uha_sample": "uha://h32::planck18::bin4_z0.80::DEMO"
+        },
+        {
+          "bin_number": 5,
+          "z_eff": 1.0,
+          "z_min": 0.9,
+          "z_max": 1.2,
+          "S8_initial": 0.759,
+          "z_factor": 0.7071067811865476,
+          "correction": 0.014142135623730952,
+          "S8_final": 0.7731421356237309,
+          "uha_sample": "uha://h32::planck18::bin5_z1.00::DEMO"
+        }
+      ],
+      "pattern": {
+        "formula": "\u0394S\u2088(z) = 0.0200 \u00d7 (1+z)^(-0.5)",
+        "baseline": 0.02,
+        "scaling": "(1+z)^(-0.5)"
+      }
+    },
+    "des": {
+      "survey": "DES-Y3",
+      "telescope": "Blanco/CTIO",
+      "area_deg2": 4100,
+      "n_bins": 4,
+      "resolution_schedule": [
+        8,
+        16,
+        24,
+        32
+      ],
+      "S8_initial": 0.776,
+      "S8_final": 0.7918831723156078,
+      "total_correction": 0.015883172315607794,
+      "bin_results": [
+        {
+          "bin_number": 1,
+          "z_eff": 0.3,
+          "z_min": 0.2,
+          "z_max": 0.43,
+          "S8_initial": 0.776,
+          "z_factor": 0.8770580193070292,
+          "correction": 0.017541160386140585,
+          "S8_final": 0.7935411603861406,
+          "uha_sample": "uha://h32::planck18::bin1_z0.30::DEMO"
+        },
+        {
+          "bin_number": 2,
+          "z_eff": 0.5,
+          "z_min": 0.43,
+          "z_max": 0.63,
+          "S8_initial": 0.776,
+          "z_factor": 0.816496580927726,
+          "correction": 0.016329931618554522,
+          "S8_final": 0.7923299316185546,
+          "uha_sample": "uha://h32::planck18::bin2_z0.50::DEMO"
+        },
+        {
+          "bin_number": 3,
+          "z_eff": 0.7,
+          "z_min": 0.63,
+          "z_max": 0.9,
+          "S8_initial": 0.776,
+          "z_factor": 0.7669649888473704,
+          "correction": 0.015339299776947408,
+          "S8_final": 0.7913392997769474,
+          "uha_sample": "uha://h32::planck18::bin3_z0.70::DEMO"
+        },
+        {
+          "bin_number": 4,
+          "z_eff": 0.95,
+          "z_min": 0.9,
+          "z_max": 1.05,
+          "S8_initial": 0.776,
+          "z_factor": 0.7161148740394329,
+          "correction": 0.014322297480788657,
+          "S8_final": 0.7903222974807886,
+          "uha_sample": "uha://h32::planck18::bin4_z0.95::DEMO"
+        }
+      ],
+      "pattern": {
+        "formula": "\u0394S\u2088(z) = 0.0200 \u00d7 (1+z)^(-0.5)",
+        "baseline": 0.02,
+        "scaling": "(1+z)^(-0.5)"
+      }
+    },
+    "hsc": {
+      "survey": "HSC-Y3",
+      "telescope": "Subaru/Hawaii",
+      "area_deg2": 416,
+      "n_bins": 4,
+      "resolution_schedule": [
+        8,
+        16,
+        24,
+        32
+      ],
+      "S8_initial": 0.78,
+      "S8_final": 0.7947173841657139,
+      "total_correction": 0.014717384165713839,
+      "bin_results": [
+        {
+          "bin_number": 1,
+          "z_eff": 0.4,
+          "z_min": 0.3,
+          "z_max": 0.6,
+          "S8_initial": 0.78,
+          "z_factor": 0.8451542547285166,
+          "correction": 0.016903085094570332,
+          "S8_final": 0.7969030850945703,
+          "uha_sample": "uha://h32::planck18::bin1_z0.40::DEMO"
+        },
+        {
+          "bin_number": 2,
+          "z_eff": 0.75,
+          "z_min": 0.6,
+          "z_max": 0.9,
+          "S8_initial": 0.78,
+          "z_factor": 0.7559289460184545,
+          "correction": 0.01511857892036909,
+          "S8_final": 0.7951185789203691,
+          "uha_sample": "uha://h32::planck18::bin2_z0.75::DEMO"
+        },
+        {
+          "bin_number": 3,
+          "z_eff": 1.1,
+          "z_min": 0.9,
+          "z_max": 1.2,
+          "S8_initial": 0.78,
+          "z_factor": 0.6900655593423543,
+          "correction": 0.013801311186847085,
+          "S8_final": 0.7938013111868472,
+          "uha_sample": "uha://h32::planck18::bin3_z1.10::DEMO"
+        },
+        {
+          "bin_number": 4,
+          "z_eff": 1.35,
+          "z_min": 1.2,
+          "z_max": 1.5,
+          "S8_initial": 0.78,
+          "z_factor": 0.6523280730534422,
+          "correction": 0.013046561461068844,
+          "S8_final": 0.7930465614610689,
+          "uha_sample": "uha://h32::planck18::bin4_z1.35::DEMO"
+        }
+      ],
+      "pattern": {
+        "formula": "\u0394S\u2088(z) = 0.0200 \u00d7 (1+z)^(-0.5)",
+        "baseline": 0.02,
+        "scaling": "(1+z)^(-0.5)"
+      }
+    }
+  },
+  "cross_validation": {
+    "pattern": "\u0394S\u2088(z) = A \u00d7 (1+z)^(-0.5)",
+    "baselines": {
+      "kids": 0.02,
+      "des": 0.020000000000000004,
+      "hsc": 0.02
+    },
+    "statistics": {
+      "mean": 0.020000000000000004,
+      "std": 2.8327915739802466e-18,
+      "max_diff": 3.469446951953614e-18
+    },
+    "consistency": "EXCELLENT"
+  }
+}

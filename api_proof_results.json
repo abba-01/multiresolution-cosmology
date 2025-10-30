@@ -1,0 +1,26 @@
+{
+  "proof_version": "2.0",
+  "proof_type": "API_BASED_THREE_SURVEY_H32",
+  "timestamp": "2025-10-30T21:24:07.942843+00:00",
+  "hashes": {
+    "sha3_512": "d73fe650d2d660e459a70130d3b1fc22534e127fa298e02b182b8763aa0a019f3236c1f23129e97b9766dfba4d729ae77edf1efa08969298003fe5133c15bc4a",
+    "sha256": "df8aeb0007c644f38469ba1481d42e23e77d6ff6e2e3b1bf430e56871e37187a",
+    "algorithm": "SHA3-512 (primary), SHA-256 (compatibility)"
+  },
+  "api_endpoints": {
+    "token": "https://got.gitgap.org/api/request-token",
+    "uha_encode": "https://got.gitgap.org/uha/encode"
+  },
+  "key_results": {
+    "kids_s8_final": 0.7751665961308107,
+    "des_s8_final": 0.7918831723156078,
+    "hsc_s8_final": 0.7947173841657139,
+    "pattern_baseline": 0.020000000000000004,
+    "consistency": "EXCELLENT"
+  },
+  "verification": {
+    "method": "Recompute SHA3-512 of results JSON",
+    "expected_hash": "d73fe650d2d660e459a70130d3b1fc22534e127fa298e02b182b8763aa0a019f3236c1f23129e97b9766dfba4d729ae77edf1efa08969298003fe5133c15bc4a",
+    "command": "python3 -c \"import json,hashlib; data=json.load(open('three_survey_api_validation.json')); print(hashlib.sha3_512(json.dumps(data,sort_keys=True,indent=2).encode()).hexdigest())\""
+  }
+}
