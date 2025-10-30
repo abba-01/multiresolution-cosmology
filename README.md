@@ -12,15 +12,6 @@
 
 **The Universal Horizon Address (UHA) encoding system is patent-protected intellectual property.**
 
-- The core UHA encoder implementation is **NOT included** in this public repository
-- Access is provided via **API only**:
-  - **Production**: https://api.gitgap.org/v1/uha/encode
-  - **Test**: https://got.gitgap.org/uha/encode
-- **Get API Keys**:
-  - Web form: https://tot.allyourbaseline.com/multiresolution-uha-api
-  - Direct request: `POST https://got.gitgap.org/api/request-token`
-  - **Academic tier**: FREE (1,000 calls/day)
-- See [UHA_API_NOTICE.md](UHA_API_NOTICE.md) for full documentation and licensing
 
 ---
 
