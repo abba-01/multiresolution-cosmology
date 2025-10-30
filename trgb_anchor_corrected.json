@@ -1,0 +1,15 @@
+{
+  "anchor": "TRGB_CCHP",
+  "scale_mpc": 30,
+  "resolution_bits_corrected": 10,
+  "resolution_bits_original": 22,
+  "domain": "stellar_population",
+  "ΔT": 0.012,
+  "reference": "Freedman+2021",
+  "notes": {
+    "correction_reason": "22 bits gives 0.238 kpc cells (too fine for 30 Mpc scale)",
+    "corrected_cell_size_mpc": 0.977,
+    "cell_to_scale_ratio": 0.0326,
+    "interpretation": "10 bits appropriate for intermediate-scale TRGB measurements"
+  }
+}

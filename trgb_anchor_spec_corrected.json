@@ -1,0 +1,20 @@
+{
+  "anchor": "TRGB_CCHP",
+  "scale_mpc": 30,
+  "resolution_bits_per_axis": 13,
+  "domain": "stellar_population",
+  "\u0394T": 0.012,
+  "reference": "Freedman+2021",
+  "uha_spec": {
+    "horizon_normalization": "R_H(a \u2248 1) \u2248 14,000 Mpc",
+    "cell_size_formula": "\u0394r = R_H / 2^N",
+    "target_cell_size": "\u0394r_target \u2248 S/20 \u2248 1.5 Mpc",
+    "actual_cell_size_mpc": 1.709,
+    "ratio_cell_to_scale": 0.057
+  },
+  "notes": {
+    "correction": "Fixed from 22 bits (wrong) to 13 bits (UHA spec)",
+    "previous_error": "Used 1 Gpc box instead of R_H = 14 Gpc",
+    "sweet_spot": "N=13 gives 1.7 Mpc cells for 30 Mpc scale"
+  }
+}

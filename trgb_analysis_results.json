@@ -1,0 +1,43 @@
+{
+  "H0_initial": 69.8,
+  "H0_final": 68.5,
+  "sigma_final": 1.5,
+  "delta_T_initial": 0.35,
+  "delta_T_final": 0.012,
+  "tension_initial": 1.235288661279818,
+  "tension_final": 0.7150744330202328,
+  "history": [
+    {
+      "resolution_bits": 8,
+      "delta_T": 0.35,
+      "H0_merged": 69.8,
+      "iteration": 0
+    },
+    {
+      "resolution_bits": 12,
+      "delta_T": 0.28,
+      "H0_merged": 69.4,
+      "iteration": 1
+    },
+    {
+      "resolution_bits": 16,
+      "delta_T": 0.18,
+      "H0_merged": 69.0,
+      "iteration": 2
+    },
+    {
+      "resolution_bits": 20,
+      "delta_T": 0.08,
+      "H0_merged": 68.7,
+      "iteration": 3
+    },
+    {
+      "resolution_bits": 24,
+      "delta_T": 0.012,
+      "H0_merged": 68.5,
+      "iteration": 4
+    }
+  ],
+  "success": true,
+  "simulation": true
+}

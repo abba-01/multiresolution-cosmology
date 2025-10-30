@@ -1,0 +1,40 @@
+{
+  "S8_initial": 0.766,
+  "S8_final": 0.8,
+  "sigma_final": 0.018,
+  "tension_initial": 2.654953952106301,
+  "tension_final": 1.4117731575135761,
+  "delta_T_final": 0.012,
+  "history": [
+    {
+      "resolution_bits": 8,
+      "S8": 0.766,
+      "delta_T": 0.3,
+      "systematic": "None"
+    },
+    {
+      "resolution_bits": 12,
+      "S8": 0.775,
+      "delta_T": 0.22,
+      "systematic": "shear_calibration"
+    },
+    {
+      "resolution_bits": 16,
+      "S8": 0.785,
+      "delta_T": 0.15,
+      "systematic": "photoz_errors"
+    },
+    {
+      "resolution_bits": 20,
+      "S8": 0.795,
+      "delta_T": 0.08,
+      "systematic": "intrinsic_alignments"
+    },
+    {
+      "resolution_bits": 24,
+      "S8": 0.8,
+      "delta_T": 0.012,
+      "systematic": "baryonic_feedback"
+    }
+  ]
+}

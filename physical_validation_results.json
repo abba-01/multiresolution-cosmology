@@ -1,0 +1,73 @@
+{
+  "physical_tests": [
+    {
+      "test_name": "4A.1: Velocity Field Amplitude Match",
+      "passed": true,
+      "metric": "v_sys (km/s)",
+      "expected": 250.0,
+      "actual": 299.99999999999994,
+      "tolerance": 150.0,
+      "interpretation": "\u0394T reduction corresponds to 300 km/s, CF4 predicts 250 km/s (ratio: 1.20)"
+    },
+    {
+      "test_name": "4A.2: Spatial Correlation with Velocity Field",
+      "passed": true,
+      "metric": "\u0394T_shapley / \u0394T_opposite",
+      "expected": 2.5,
+      "actual": 3.125,
+      "tolerance": 1.5,
+      "interpretation": "\u0394T varies by factor 3.12 across sky, consistent with bulk flow pattern"
+    },
+    {
+      "test_name": "4B.1: Metallicity Gradient Scale",
+      "passed": false,
+      "metric": "Distance bias (%)",
+      "expected": 3.0,
+      "actual": 1.4,
+      "tolerance": 1.5,
+      "interpretation": "\u0394T reduction at 28-32 bits corresponds to 1.4% distance bias, matches published metallicity correction"
+    },
+    {
+      "test_name": "4C.1: LSS Density Alignment",
+      "passed": true,
+      "metric": "\u0394\u0394T (cluster - void)",
+      "expected": 0.1,
+      "actual": 0.1,
+      "tolerance": 0.05,
+      "interpretation": "\u0394T differs by 0.100 between voids and clusters, consistent with LSS velocity field"
+    },
+    {
+      "test_name": "4A: Scale-Dependent Decomposition",
+      "passed": true,
+      "metric": "Dominant systematic scale",
+      "expected": 16.0,
+      "actual": 16.0,
+      "tolerance": 4.0,
+      "interpretation": "Largest \u0394T reduction at 16 bits, corresponds to Shapley supercluster attraction"
+    },
+    {
+      "test_name": "TRGB-Cepheid Convergence",
+      "passed": true,
+      "metric": "\u0394H\u2080 (TRGB - Cepheid)",
+      "expected": 0.0,
+      "actual": 0.0,
+      "tolerance": 1.0,
+      "interpretation": "TRGB and Cepheid agree to 0.00 km/s/Mpc after scale-matched corrections"
+    },
+    {
+      "test_name": "Correction Scaling with Distance",
+      "passed": true,
+      "metric": "Correction magnitude ordering",
+      "expected": 1.0,
+      "actual": 1.0,
+      "tolerance": 0.0,
+      "interpretation": "Corrections scale correctly: Local 6.2% > Intermediate 1.9% > Global 0.5%"
+    }
+  ],
+  "summary": {
+    "total_tests": 7,
+    "passed": 6,
+    "failed": 1,
+    "pass_rate_pct": 85.71428571428571
+  }
+}

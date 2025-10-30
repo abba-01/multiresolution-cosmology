@@ -1,0 +1,216 @@
+{
+  "timestamp": "2025-10-30",
+  "test_suites": [
+    {
+      "suite_name": "Scale-Matched Independent Anchors",
+      "summary": {
+        "pending": 0,
+        "running": 0,
+        "passed": 1,
+        "failed": 1,
+        "skipped": 0,
+        "error": 0
+      },
+      "tests": [
+        {
+          "test_id": "1A.1",
+          "test_name": "NGC 4258 Maser High-Resolution Encoding",
+          "status": "passed",
+          "expected": "32-bit encoding successful",
+          "actual": "32-bit encoding successful",
+          "error_message": null,
+          "execution_time": 0.0,
+          "metadata": {
+            "uha_resolution": 32
+          }
+        },
+        {
+          "test_id": "1A.2",
+          "test_name": "Geometric Distance Ladder Consistency",
+          "status": "failed",
+          "expected": "\u0394T < 0.15 for all pairs",
+          "actual": "Max \u0394T = 0.202",
+          "error_message": null,
+          "execution_time": 0.0,
+          "metadata": {
+            "max_delta_T": 0.20151708874395063,
+            "all_delta_T": [
+              0.13014480157383837,
+              0.20151708874395063,
+              0.08478501284163242
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "suite_name": "Resolution Mismatch Detection",
+      "summary": {
+        "pending": 0,
+        "running": 0,
+        "passed": 2,
+        "failed": 0,
+        "skipped": 0,
+        "error": 0
+      },
+      "tests": [
+        {
+          "test_id": "2A.1",
+          "test_name": "Local Anchor at Wrong (Coarse) Resolution",
+          "status": "passed",
+          "expected": "Resolution loss > 80%",
+          "actual": "Resolution loss = 97.8%",
+          "error_message": null,
+          "execution_time": 0.0,
+          "metadata": {
+            "resolution_loss_pct": 97.75280898876404
+          }
+        },
+        {
+          "test_id": "2B.1",
+          "test_name": "Single-Resolution Convergence Failure",
+          "status": "passed",
+          "expected": "\u0394H\u2080 > 3.0 km/s/Mpc (no convergence)",
+          "actual": "\u0394H\u2080 = 5.13 km/s/Mpc",
+          "error_message": null,
+          "execution_time": 0.0,
+          "metadata": {
+            "initial_delta_H0": 5.697088033655746,
+            "final_delta_H0": 5.127379230290171,
+            "improvement_pct": 10.0
+          }
+        }
+      ]
+    },
+    {
+      "suite_name": "Simulated Multi-Scale Universe",
+      "summary": {
+        "pending": 0,
+        "running": 0,
+        "passed": 2,
+        "failed": 0,
+        "skipped": 0,
+        "error": 0
+      },
+      "tests": [
+        {
+          "test_id": "3A.1",
+          "test_name": "Three-Scale Systematic Recovery",
+          "status": "passed",
+          "expected": "Recovery error < 0.5 km/s/Mpc",
+          "actual": "Recovery error = 0.37 km/s/Mpc",
+          "error_message": null,
+          "execution_time": 0.0,
+          "metadata": {
+            "H0_true": 68.0,
+            "H0_observed": 69.27942161278972,
+            "H0_recovered": 68.36853536955617,
+            "recovery_error": 0.36853536955617017
+          }
+        },
+        {
+          "test_id": "3B.1",
+          "test_name": "Early Dark Energy Non-Convergence",
+          "status": "passed",
+          "expected": "\u0394T > 0.30 (no convergence)",
+          "actual": "\u0394T = 1.819",
+          "error_message": null,
+          "execution_time": 0.0,
+          "metadata": {
+            "initial_delta_T": 2.0208000000000035,
+            "final_delta_T": 1.8187200000000032,
+            "interpretation": "Method correctly does not force convergence on new physics"
+          }
+        }
+      ]
+    },
+    {
+      "suite_name": "Resolution Schedule Optimization",
+      "summary": {
+        "pending": 0,
+        "running": 0,
+        "passed": 1,
+        "failed": 1,
+        "skipped": 0,
+        "error": 0
+      },
+      "tests": [
+        {
+          "test_id": "5A.1",
+          "test_name": "Resolution Schedule Independence",
+          "status": "failed",
+          "expected": "H\u2080 range < 0.5 km/s/Mpc across schedules",
+          "actual": "H\u2080 range = 0.56 km/s/Mpc",
+          "error_message": null,
+          "execution_time": 0.0,
+          "metadata": {
+            "H0_results": {
+              "conservative": 68.66329337717072,
+              "aggressive": 68.984405380374,
+              "fine_grained": 68.42449363762753
+            },
+            "H0_range": 0.5599117427464648
+          }
+        },
+        {
+          "test_id": "5B.1",
+          "test_name": "Critical Scale Necessity",
+          "status": "passed",
+          "expected": "\u0394T degradation > 0.05 when skipping scale",
+          "actual": "\u0394T degradation = 0.057",
+          "error_message": null,
+          "execution_time": 0.0,
+          "metadata": {
+            "delta_T_full": 0.008,
+            "delta_T_skip": 0.065,
+            "interpretation": "Intermediate scales are necessary for full convergence"
+          }
+        }
+      ]
+    },
+    {
+      "suite_name": "Robustness & Sensitivity",
+      "summary": {
+        "pending": 0,
+        "running": 0,
+        "passed": 2,
+        "failed": 0,
+        "skipped": 0,
+        "error": 0
+      },
+      "tests": [
+        {
+          "test_id": "8A.1",
+          "test_name": "Bootstrap Resampling Stability",
+          "status": "passed",
+          "expected": "H\u2080 = 68.518 \u00b1 1.292 km/s/Mpc",
+          "actual": "H\u2080 = 68.50 \u00b1 1.11 km/s/Mpc",
+          "error_message": null,
+          "execution_time": 0.0,
+          "metadata": {
+            "H0_mean": 68.50405715919709,
+            "H0_std": 1.1104464775319467,
+            "n_bootstrap": 100
+          }
+        },
+        {
+          "test_id": "8B.1",
+          "test_name": "Convergence Threshold Independence",
+          "status": "passed",
+          "expected": "H\u2080 range < 0.5 km/s/Mpc across thresholds",
+          "actual": "H\u2080 range = 0.15 km/s/Mpc",
+          "error_message": null,
+          "execution_time": 0.0,
+          "metadata": {
+            "H0_results": {
+              "0.05": 68.3329944610282,
+              "0.1": 68.38796060189746,
+              "0.15": 68.47920101895168,
+              "0.2": 68.3684626170855
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "S8_initial": 0.766326222973021,
+  "S8_final": 0.800326222973021,
+  "sigma_final": 0.018,
+  "delta_S8_initial": 0.06780121913558013,
+  "delta_S8_final": 0.033801219135580096,
+  "tension_initial": 2.6680999471004254,
+  "tension_final": 1.4035192313778333,
+  "delta_T_final": 0.012,
+  "history": [
+    {
+      "resolution_bits": 8,
+      "S8": 0.766326222973021,
+      "delta_T": 0.3,
+      "correction": 0.0,
+      "systematic": "None (starting point)"
+    },
+    {
+      "resolution_bits": 12,
+      "S8": 0.775326222973021,
+      "delta_T": 0.22,
+      "correction": 0.009,
+      "systematic": "Shear calibration (+1%)"
+    },
+    {
+      "resolution_bits": 16,
+      "S8": 0.785326222973021,
+      "delta_T": 0.15,
+      "correction": 0.019,
+      "systematic": "Photo-z errors (+2%)"
+    },
+    {
+      "resolution_bits": 20,
+      "S8": 0.795326222973021,
+      "delta_T": 0.08,
+      "correction": 0.029,
+      "systematic": "Intrinsic alignments (+3%)"
+    },
+    {
+      "resolution_bits": 24,
+      "S8": 0.800326222973021,
+      "delta_T": 0.012,
+      "correction": 0.034,
+      "systematic": "Baryonic feedback (+5%)"
+    }
+  ],
+  "success": true,
+  "simulation": true
+}

@@ -1,0 +1,100 @@
+{
+  "anchor": {
+    "anchor": "TRGB_CCHP",
+    "scale_mpc": 30,
+    "resolution_bits": 22,
+    "domain": "stellar_population",
+    "\u0394T": 0.012,
+    "reference": "Freedman+2021"
+  },
+  "validation_results": {
+    "scale_matching": {
+      "status": "FAIL",
+      "cell_size_mpc": 0.0002384185791015625,
+      "ratio": 7.947285970052084e-06,
+      "expected_delta_T": 0.012
+    },
+    "convergence": {
+      "H0_initial": 69.8,
+      "H0_predicted": 68.5,
+      "H0_shift": -1.2999999999999972,
+      "tension_initial_sigma": 1.235288661279818,
+      "tension_final_sigma": 0.7150744330202328,
+      "tension_reduction_pct": 42.11276639750084,
+      "delta_T": 0.012
+    },
+    "cross_method": {
+      "shoes_shift_pct": -6.215772179627609,
+      "trgb_shift_pct": -1.8624641833810847,
+      "convergence": true
+    }
+  },
+  "test_specification": {
+    "test_id": "TRGB-1",
+    "test_name": "TRGB Multi-Resolution Convergence",
+    "anchor": {
+      "anchor": "TRGB_CCHP",
+      "scale_mpc": 30,
+      "resolution_bits": 22,
+      "domain": "stellar_population",
+      "\u0394T": 0.012,
+      "reference": "Freedman+2021"
+    },
+    "test_type": "real_data",
+    "priority": "HIGH",
+    "status": "READY",
+    "data_requirements": {
+      "dataset": "Carnegie-Chicago Hubble Program (CCHP)",
+      "reference": "Freedman et al. 2019, 2021",
+      "n_galaxies": 18,
+      "distance_range_mpc": [
+        5,
+        40
+      ],
+      "H0_measurement": {
+        "value": 69.8,
+        "uncertainty": 1.9,
+        "units": "km/s/Mpc"
+      }
+    },
+    "multi_resolution_parameters": {
+      "resolution_schedule": [
+        8,
+        12,
+        16,
+        20,
+        24
+      ],
+      "primary_resolution": 22,
+      "convergence_threshold": 0.15,
+      "expected_iterations": 5
+    },
+    "predictions": {
+      "H0_corrected": 68.5,
+      "sigma_corrected": 1.5,
+      "delta_T_final": 0.012,
+      "primary_systematic": "peculiar_velocities",
+      "systematic_amplitude_kms": 300
+    },
+    "success_criteria": {
+      "H0_within_range": [
+        67.5,
+        69.5
+      ],
+      "delta_T_threshold": 0.15,
+      "convergence_with_planck": true,
+      "convergence_with_shoes": true
+    },
+    "falsification_criteria": {
+      "H0_corrected > 70.0": "Multi-resolution fails at intermediate scale",
+      "delta_T > 0.25": "Systematics not primarily spatial",
+      "diverge_from_shoes": "Scale-matching hypothesis invalid"
+    },
+    "timeline": {
+      "data_available": "NOW",
+      "analysis_duration": "2-3 weeks",
+      "expected_completion": "2025-11-15"
+    }
+  },
+  "timestamp": "2025-10-30"
+}
