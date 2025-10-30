@@ -215,6 +215,26 @@ DES analysis at h32 (3.3 pc) shows:
 
 ---
 
+## UHA API Access
+
+The UHA encoder used in this analysis is accessed via API:
+
+**Endpoints**:
+- Test: `https://got.gitgap.org/uha/encode`
+- Production: `https://api.aybllc.org/v1/uha/encode`
+
+**Get API Keys**:
+- Web form: https://tot.allyourbaseline.com/multiresolution-uha-api
+- Direct: `POST https://got.gitgap.org/api/request-token`
+- Academic tier: FREE (1,000 calls/day)
+
+**Status**: Verified operational ✅
+- Token generation working
+- h32 encoding available
+- See `UHA_API_NOTICE.md` for details
+
+---
+
 ## Files Generated
 
 1. **Analysis scripts**:

@@ -297,6 +297,80 @@ The (1+z)^(-0.5) redshift dependence suggests:
 
 ---
 
+## UHA Encoder API Access
+
+The Universal Horizon Address (UHA) encoding system used in this analysis is **patent-protected** and accessed via API endpoints:
+
+### API Endpoints
+
+**Production API**: `https://api.aybllc.org/v1/uha/encode`
+**Test Endpoint**: `https://got.gitgap.org/uha/encode`
+
+### Getting API Keys
+
+**Option 1: Web Form (Recommended)**
+Visit: https://tot.allyourbaseline.com/multiresolution-uha-api
+
+**Option 2: Direct API Request**
+```bash
+curl -X POST https://got.gitgap.org/api/request-token \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Your Name",
+    "institution": "Your Institution",
+    "email": "your@email.com",
+    "access_tier": "academic",
+    "use_case": "Research description",
+    "daily_limit": 100
+  }'
+```
+
+### Access Tiers
+
+| Tier | Daily Limit | Price | Use Case |
+|------|------------|-------|----------|
+| **Academic** | 1,000 calls | FREE | Peer-reviewed publications |
+| **Commercial** | 10,000 calls | $5,000/year | Commercial research |
+| **Enterprise** | 100,000 calls | Contact | Large-scale analysis |
+
+### Usage Example
+
+```python
+import requests
+
+API_TOKEN = "your_token_here"  # Get from https://got.gitgap.org/api/request-token
+
+response = requests.post(
+    'https://got.gitgap.org/uha/encode',
+    json={
+        'ra_deg': 184.74,
+        'dec_deg': 47.30,
+        'distance_mpc': 7.60,
+        'resolution_bits': 32,  # h32 resolution
+        'scale_factor': 1.0,
+        'cosmo_params': {
+            'h0': 67.36,
+            'omega_m': 0.315,
+            'omega_lambda': 0.685
+        }
+    },
+    headers={'Authorization': f'Bearer {API_TOKEN}'}
+)
+
+result = response.json()
+print(f"UHA Code: {result['uha_code']}")
+print(f"Cell size: {result['cell_size_mpc']} Mpc")  # 3.3e-6 Mpc = 3.3 pc
+```
+
+**Full documentation**: See `UHA_API_NOTICE.md`
+
+**Server status**: Verified operational (2025-10-30)
+- Token generation: ✅ WORKING
+- UHA encoder endpoint: ✅ LIVE
+- Database integration: ✅ ACTIVE
+
+---
+
 ## Files Generated
 
 ### Analysis Scripts

@@ -4,6 +4,36 @@ DES-Y3 Real Data Analysis
 Multi-resolution refinement on actual DES Y3 weak lensing survey data
 
 This implements cross-validation with KiDS-1000 using real DES correlation functions
+
+================================================================================
+UHA ENCODER API ACCESS REQUIRED
+================================================================================
+
+This script uses simulated systematic corrections based on the expected
+(1+z)^(-0.5) pattern. For REAL UHA encoding at h32 resolution, you need an API key.
+
+GET FREE API KEY (Academic: 1,000 calls/day):
+  - Web form: https://tot.allyourbaseline.com/multiresolution-uha-api
+  - Direct API: POST https://got.gitgap.org/api/request-token
+
+EXAMPLE UHA ENCODING:
+  import requests
+
+  API_TOKEN = "your_token_here"
+  response = requests.post(
+      'https://got.gitgap.org/uha/encode',
+      json={
+          'ra_deg': ra, 'dec_deg': dec, 'distance_mpc': distance,
+          'resolution_bits': 32,  # h32 = 3.3 parsec cells
+          'scale_factor': 1.0,
+          'cosmo_params': {'h0': 67.36, 'omega_m': 0.315, 'omega_lambda': 0.685}
+      },
+      headers={'Authorization': f'Bearer {API_TOKEN}'}
+  )
+  uha_code = response.json()['uha_code']
+
+For details: See UHA_API_NOTICE.md
+================================================================================
 """
 
 import numpy as np

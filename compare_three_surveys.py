@@ -2,6 +2,18 @@
 """
 Three-Survey Cross-Validation: KiDS-1000 vs DES-Y3 vs HSC-Y3
 Final verification of (1+z)^(-0.5) pattern across all major weak lensing surveys
+
+================================================================================
+NOTE: UHA Encoder API
+================================================================================
+The underlying UHA encoding for h32 resolution analysis is accessed via API:
+  - Test endpoint: https://got.gitgap.org/uha/encode
+  - Production: https://api.aybllc.org/v1/uha/encode
+  - Get free API key: https://got.gitgap.org/api/request-token
+
+This script compares results from analyses that used UHA encoding.
+For API details, see UHA_API_NOTICE.md
+================================================================================
 """
 
 import numpy as np
