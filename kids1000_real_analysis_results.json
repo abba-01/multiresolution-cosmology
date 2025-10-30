@@ -1,0 +1,233 @@
+{
+  "survey": "KiDS-1000",
+  "S8_initial": 0.759,
+  "sigma_initial": 0.024,
+  "S8_final": 0.7750149554406999,
+  "total_correction": 0.016014955440699908,
+  "tension_initial": 2.60015716980576,
+  "tension_final": 2.044938486962353,
+  "delta_T_final": 0.002468924114706009,
+  "resolution_schedule": [
+    8,
+    12,
+    16,
+    20,
+    24
+  ],
+  "bin_results": [
+    {
+      "z_bin": [
+        0.1,
+        0.3
+      ],
+      "z_eff": 0.199,
+      "optimal_resolution": 22,
+      "final_correction": 0.018265030599088922,
+      "final_delta_T": 0.002468924114706009,
+      "history": [
+        {
+          "resolution_bits": 8,
+          "delta_S8_correction": 0.0,
+          "delta_T": 0.3,
+          "scale_mpc": 54.6875
+        },
+        {
+          "resolution_bits": 12,
+          "delta_S8_correction": 0.0036530061198177845,
+          "delta_T": 0.09035826357366064,
+          "scale_mpc": 3.41796875
+        },
+        {
+          "resolution_bits": 16,
+          "delta_S8_correction": 0.007306012239635569,
+          "delta_T": 0.027215385986823753,
+          "scale_mpc": 0.213623046875
+        },
+        {
+          "resolution_bits": 20,
+          "delta_S8_correction": 0.013698772949316691,
+          "delta_T": 0.00819711673418777,
+          "scale_mpc": 0.0133514404296875
+        },
+        {
+          "resolution_bits": 24,
+          "delta_S8_correction": 0.018265030599088922,
+          "delta_T": 0.002468924114706009,
+          "scale_mpc": 0.0008344650268554688
+        }
+      ]
+    },
+    {
+      "z_bin": [
+        0.3,
+        0.5
+      ],
+      "z_eff": 0.398,
+      "optimal_resolution": 20,
+      "final_correction": 0.016915171678234565,
+      "final_delta_T": 0.002468924114706009,
+      "history": [
+        {
+          "resolution_bits": 8,
+          "delta_S8_correction": 0.0,
+          "delta_T": 0.3,
+          "scale_mpc": 54.6875
+        },
+        {
+          "resolution_bits": 12,
+          "delta_S8_correction": 0.0033830343356469135,
+          "delta_T": 0.09035826357366064,
+          "scale_mpc": 3.41796875
+        },
+        {
+          "resolution_bits": 16,
+          "delta_S8_correction": 0.006766068671293827,
+          "delta_T": 0.027215385986823753,
+          "scale_mpc": 0.213623046875
+        },
+        {
+          "resolution_bits": 20,
+          "delta_S8_correction": 0.012686378758675924,
+          "delta_T": 0.00819711673418777,
+          "scale_mpc": 0.0133514404296875
+        },
+        {
+          "resolution_bits": 24,
+          "delta_S8_correction": 0.016915171678234565,
+          "delta_T": 0.002468924114706009,
+          "scale_mpc": 0.0008344650268554688
+        }
+      ]
+    },
+    {
+      "z_bin": [
+        0.5,
+        0.7
+      ],
+      "z_eff": 0.594,
+      "optimal_resolution": 20,
+      "final_correction": 0.01584111829569549,
+      "final_delta_T": 0.002468924114706009,
+      "history": [
+        {
+          "resolution_bits": 8,
+          "delta_S8_correction": 0.0,
+          "delta_T": 0.3,
+          "scale_mpc": 54.6875
+        },
+        {
+          "resolution_bits": 12,
+          "delta_S8_correction": 0.003168223659139098,
+          "delta_T": 0.09035826357366064,
+          "scale_mpc": 3.41796875
+        },
+        {
+          "resolution_bits": 16,
+          "delta_S8_correction": 0.006336447318278196,
+          "delta_T": 0.027215385986823753,
+          "scale_mpc": 0.213623046875
+        },
+        {
+          "resolution_bits": 20,
+          "delta_S8_correction": 0.011880838721771616,
+          "delta_T": 0.00819711673418777,
+          "scale_mpc": 0.0133514404296875
+        },
+        {
+          "resolution_bits": 24,
+          "delta_S8_correction": 0.01584111829569549,
+          "delta_T": 0.002468924114706009,
+          "scale_mpc": 0.0008344650268554688
+        }
+      ]
+    },
+    {
+      "z_bin": [
+        0.7,
+        0.9
+      ],
+      "z_eff": 0.788,
+      "optimal_resolution": 19,
+      "final_correction": 0.014957060089885262,
+      "final_delta_T": 0.002468924114706009,
+      "history": [
+        {
+          "resolution_bits": 8,
+          "delta_S8_correction": 0.0,
+          "delta_T": 0.3,
+          "scale_mpc": 54.6875
+        },
+        {
+          "resolution_bits": 12,
+          "delta_S8_correction": 0.0029914120179770523,
+          "delta_T": 0.09035826357366064,
+          "scale_mpc": 3.41796875
+        },
+        {
+          "resolution_bits": 16,
+          "delta_S8_correction": 0.005982824035954105,
+          "delta_T": 0.027215385986823753,
+          "scale_mpc": 0.213623046875
+        },
+        {
+          "resolution_bits": 20,
+          "delta_S8_correction": 0.011217795067413945,
+          "delta_T": 0.00819711673418777,
+          "scale_mpc": 0.0133514404296875
+        },
+        {
+          "resolution_bits": 24,
+          "delta_S8_correction": 0.014957060089885262,
+          "delta_T": 0.002468924114706009,
+          "scale_mpc": 0.0008344650268554688
+        }
+      ]
+    },
+    {
+      "z_bin": [
+        0.9,
+        1.2
+      ],
+      "z_eff": 1.013,
+      "optimal_resolution": 19,
+      "final_correction": 0.014096396540595293,
+      "final_delta_T": 0.002468924114706009,
+      "history": [
+        {
+          "resolution_bits": 8,
+          "delta_S8_correction": 0.0,
+          "delta_T": 0.3,
+          "scale_mpc": 54.6875
+        },
+        {
+          "resolution_bits": 12,
+          "delta_S8_correction": 0.0028192793081190585,
+          "delta_T": 0.09035826357366064,
+          "scale_mpc": 3.41796875
+        },
+        {
+          "resolution_bits": 16,
+          "delta_S8_correction": 0.005638558616238117,
+          "delta_T": 0.027215385986823753,
+          "scale_mpc": 0.213623046875
+        },
+        {
+          "resolution_bits": 20,
+          "delta_S8_correction": 0.01057229740544647,
+          "delta_T": 0.00819711673418777,
+          "scale_mpc": 0.0133514404296875
+        },
+        {
+          "resolution_bits": 24,
+          "delta_S8_correction": 0.014096396540595293,
+          "delta_T": 0.002468924114706009,
+          "scale_mpc": 0.0008344650268554688
+        }
+      ]
+    }
+  ],
+  "planck_comparison": {
+    "S8": 0.834,
+    "sigma": 0.016
+  }
+}
