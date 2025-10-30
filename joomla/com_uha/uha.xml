@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="component" method="upgrade">
+    <name>COM_UHA</name>
+    <author>Dr. Eric D. Martin</author>
+    <creationDate>October 2025</creationDate>
+    <copyright>(C) 2025 All Your Baseline LLC</copyright>
+    <license>Proprietary</license>
+    <authorEmail>support@aybllc.org</authorEmail>
+    <authorUrl>https://allyourbaseline.com</authorUrl>
+    <version>1.0.0</version>
+    <description>COM_UHA_XML_DESCRIPTION</description>
+
+    <namespace path="src">AllYourBaseline\Component\Uha</namespace>
+
+    <!-- Installation -->
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+
+    <!-- Uninstallation -->
+    <uninstall>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+        </sql>
+    </uninstall>
+
+    <!-- Site files -->
+    <files folder="site">
+        <folder>forms</folder>
+        <folder>src</folder>
+        <folder>tmpl</folder>
+        <folder>language</folder>
+    </files>
+
+    <!-- Media files -->
+    <media destination="com_uha" folder="media">
+        <folder>js</folder>
+        <folder>css</folder>
+        <folder>images</folder>
+    </media>
+
+    <!-- Scripts (Python) -->
+    <scriptfile>scripts/api_cryptographic_proof_system.py</scriptfile>
+
+    <!-- Administration files -->
+    <administration>
+        <menu img="class:key" alt="COM_UHA">COM_UHA</menu>
+        <submenu>
+            <menu link="option=com_uha&amp;view=dashboard"
+                  img="class:chart"
+                  alt="Dashboard">COM_UHA_DASHBOARD</menu>
+            <menu link="option=com_uha&amp;view=tokens"
+                  img="class:key"
+                  alt="Tokens">COM_UHA_TOKENS</menu>
+        </submenu>
+
+        <files folder="admin">
+            <filename>access.xml</filename>
+            <filename>config.xml</filename>
+            <folder>forms</folder>
+            <folder>language</folder>
+            <folder>services</folder>
+            <folder>sql</folder>
+            <folder>src</folder>
+            <folder>tmpl</folder>
+        </files>
+
+        <languages folder="admin/language">
+            <language tag="en-GB">en-GB/com_uha.ini</language>
+            <language tag="en-GB">en-GB/com_uha.sys.ini</language>
+        </languages>
+    </administration>
+
+    <!-- Update servers -->
+    <updateservers>
+        <server type="extension" priority="1" name="UHA Component Updates">
+            https://allyourbaseline.com/updates/com_uha.xml
+        </server>
+    </updateservers>
+</extension>
