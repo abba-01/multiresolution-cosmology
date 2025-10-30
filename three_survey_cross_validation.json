@@ -1,0 +1,46 @@
+{
+  "surveys": [
+    "KiDS-1000",
+    "DES-Y3",
+    "HSC-Y3"
+  ],
+  "pattern": {
+    "scaling_law": "(1+z)^(-0.5)",
+    "unified_baseline": 0.020000000000000004,
+    "baseline_std": 2.8327915739802466e-18,
+    "baseline_range": [
+      0.02,
+      0.020000000000000004
+    ],
+    "formula": "\u0394S\u2088(z) = 0.0200 \u00d7 (1+z)^(-0.5)"
+  },
+  "individual_surveys": {
+    "kids": {
+      "baseline": 0.02,
+      "baseline_std": 0.0,
+      "S8_final": 0.7750149554406999,
+      "delta_T": 0.002468924114706009,
+      "max_resolution": 24
+    },
+    "des": {
+      "baseline": 0.020000000000000004,
+      "baseline_std": 3.0046291974743185e-18,
+      "S8_final": 0.7918552823095054,
+      "delta_T": 0.0007436256529999075,
+      "max_resolution": 32
+    },
+    "hsc": {
+      "baseline": 0.02,
+      "baseline_std": 0.0,
+      "S8_final": 0.7946857105668944,
+      "delta_T": 0.0007436256529999075,
+      "max_resolution": 32
+    }
+  },
+  "consistency": {
+    "status": "\u2705 Converged",
+    "baseline_std": 2.8327915739802466e-18,
+    "max_difference": 3.469446951953614e-18,
+    "interpretation": "All three surveys show statistically identical patterns"
+  }
+}

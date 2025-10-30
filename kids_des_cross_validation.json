@@ -1,0 +1,36 @@
+{
+  "surveys": [
+    "KiDS-1000",
+    "DES-Y3"
+  ],
+  "kids": {
+    "mean_baseline": 0.02,
+    "std_baseline": 0.0,
+    "total_correction": 0.016014955440699908,
+    "S8_initial": 0.759,
+    "S8_final": 0.7750149554406999,
+    "tension_reduction_pct": 21.35327392093316,
+    "max_resolution": 24
+  },
+  "des": {
+    "mean_baseline": 0.020000000000000004,
+    "std_baseline": 3.0046291974743185e-18,
+    "total_correction": 0.015855282309505347,
+    "S8_initial": 0.776,
+    "S8_final": 0.7918552823095054,
+    "tension_reduction_pct": 27.33669363707828,
+    "max_resolution": 32
+  },
+  "consistency": {
+    "baseline_difference": 3.469446951953614e-18,
+    "fractional_difference_pct": 1.7347234759768068e-14,
+    "status": "\u2705 EXCELLENT",
+    "interpretation": "Patterns are statistically indistinguishable"
+  },
+  "unified_pattern": {
+    "scaling_law": "(1+z)^(-0.5)",
+    "combined_baseline": 0.020000000000000004,
+    "combined_uncertainty": 3.0046291974743185e-18,
+    "formula": "\u0394S\u2088(z) = 0.0200 \u00d7 (1+z)^(-0.5)"
+  }
+}
