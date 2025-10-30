@@ -1,0 +1,42 @@
+{
+  "H0": {
+    "value": 67.96096150187613,
+    "sigma": 0.35308869495676004,
+    "chi2": 2.4161084148617116,
+    "dof": 2,
+    "probes": [
+      "Planck_CMB",
+      "BAO_BOSS",
+      "SH0ES_corrected"
+    ]
+  },
+  "S8": {
+    "value": 0.8153262739330094,
+    "sigma": 0.007921055563028048,
+    "chi2": 7.82327353245512,
+    "dof": 2,
+    "probes": [
+      "Planck_CMB",
+      "Planck_Lensing",
+      "WeakLensing_combined"
+    ]
+  },
+  "Omega_m": {
+    "value": 0.31219362257308386,
+    "sigma": 0.003956918276474015,
+    "chi2": 0.6215558798814746,
+    "dof": 2,
+    "probes": [
+      "Planck_CMB",
+      "Planck_Lensing",
+      "BAO_BOSS"
+    ]
+  },
+  "concordance": {
+    "total_chi2": 10.860937827198308,
+    "total_dof": 6,
+    "chi2_per_dof": 1.8101563045330513,
+    "p_value": 0.0927705811566536,
+    "verdict": "\u2705 GOOD CONCORDANCE"
+  }
+}

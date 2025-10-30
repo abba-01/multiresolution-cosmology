@@ -1,0 +1,11 @@
+# GPG Encryption Passphrase for private_proof.tar.gz.gpg
+
+Passphrase: multiresolution-cosmology-proof-2025-10-30
+
+To decrypt:
+  gpg --batch --passphrase "multiresolution-cosmology-proof-2025-10-30" --decrypt private_proof.tar.gz.gpg > private_proof.tar.gz
+  tar -xzf private_proof.tar.gz
+
+SHA-256 (encrypted): 83fb514a2af30ceeedcba8e59b12480fa0483d1fd1a2a4a8bf0afe0c85279760
+Cipher: AES-256
+Date: 2025-10-30

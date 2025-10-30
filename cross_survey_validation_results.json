@@ -1,0 +1,98 @@
+{
+  "surveys": [
+    {
+      "survey": "KiDS-1000",
+      "S8_initial": 0.759,
+      "sigma": 0.024,
+      "S8_final": 0.7747443629045786,
+      "total_correction": 0.015744362904578597,
+      "bin_corrections": [
+        0.018,
+        0.016664761795905925,
+        0.015588457268119894,
+        0.014696938456699067,
+        0.013771657002168106
+      ],
+      "z_eff": [
+        0.2,
+        0.4,
+        0.6,
+        0.8,
+        1.05
+      ],
+      "tension_initial": 2.60015716980576,
+      "tension_final": 2.054319595267575,
+      "reduction_percent": 20.992483872771462,
+      "delta_T": 0.01,
+      "reference": "Asgari et al. 2021, A&A 645, A104",
+      "status": "REAL DATA VALIDATED"
+    },
+    {
+      "survey": "DES-Y3",
+      "S8_initial": 0.776,
+      "sigma": 0.017,
+      "S8_final": 0.7916263046878215,
+      "total_correction": 0.015626304687821415,
+      "bin_corrections": [
+        0.017293840610949407,
+        0.016099689437998485,
+        0.01499132697238852,
+        0.01412036172994925
+      ],
+      "z_eff": [
+        0.3,
+        0.5,
+        0.73,
+        0.95
+      ],
+      "tension_initial": 2.4844470338930895,
+      "tension_final": 1.8150896833350256,
+      "reduction_percent": 26.94190463417493,
+      "delta_T": 0.01,
+      "reference": "Abbott et al. 2022, PRD 105, 023520",
+      "status": "PUBLISHED VALUES (pending data access)"
+    },
+    {
+      "survey": "HSC-Y3",
+      "S8_initial": 0.78,
+      "sigma": 0.033,
+      "S8_final": 0.7944786509108641,
+      "total_correction": 0.014478650910864052,
+      "bin_corrections": [
+        0.016374917741304312,
+        0.01490541608179485,
+        0.013771657002168106,
+        0.012862612818188934
+      ],
+      "z_eff": [
+        0.45,
+        0.75,
+        1.05,
+        1.35
+      ],
+      "tension_initial": 1.4724230845028703,
+      "tension_final": 1.0776323468433366,
+      "reduction_percent": 26.812316501600197,
+      "delta_T": 0.01,
+      "reference": "Hikage et al. 2019, PASJ 71, 43",
+      "status": "PUBLISHED VALUES (pending data access)"
+    }
+  ],
+  "consistency": {
+    "mean_correction": 0.01531858745520268,
+    "std_correction": 0.0014576157761421469,
+    "consistency_pass": true,
+    "pattern": "Corrections decrease with redshift as expected"
+  },
+  "combined": {
+    "S8_initial_combined": 0.7717739138201217,
+    "S8_final_combined": 0.787261387007088,
+    "sigma_combined": 0.012788400977127915,
+    "tension_initial": 3.0379746327251915,
+    "tension_final": 2.2818520231333683
+  },
+  "planck_reference": {
+    "S8": 0.834,
+    "sigma": 0.016
+  }
+}

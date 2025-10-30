@@ -1,0 +1,13 @@
+{
+  "data_source": "REAL KiDS-1000 FITS files",
+  "S8_initial": 0.759,
+  "sigma_initial": 0.024,
+  "S8_final": 0.7749695235488616,
+  "total_correction": 0.015969523548861587,
+  "tension_initial": 2.60015716980576,
+  "tension_final": 2.0465135544197004,
+  "reduction_percent": 21.29269806514883,
+  "delta_T": 0.01,
+  "bins_analyzed": 5,
+  "total_measurements": 45
+}
