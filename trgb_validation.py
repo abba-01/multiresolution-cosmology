@@ -198,7 +198,7 @@ def compare_trgb_to_shoes():
 
     # TRGB: Intermediate scale (~30 Mpc)
     trgb_scale_mpc = TRGB_ANCHOR['scale_mpc']
-    trgb_H0_raw = 69.8
+    trgb_H0_raw = TRGB_H0
     trgb_H0_corrected = 68.5
     trgb_shift = trgb_H0_corrected - trgb_H0_raw
 
