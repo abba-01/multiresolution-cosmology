@@ -4,15 +4,23 @@ Multi-Resolution UHA Encoding Endpoint
 
 NEW API endpoint for /v1/merge/multiresolution
 
+REFACTORED: Now uses centralized SSOT configuration
+
 This keeps the multi-resolution implementation server-side (proprietary),
 exposing only an API interface for researchers.
 
 Deploy to: /got/uha-api-service/app/multiresolution.py
+
+Author: Eric D. Martin (All Your Baseline LLC)
+Date: 2025-10-30
 """
 
 from typing import List, Dict, Optional, Tuple
 from pydantic import BaseModel, Field
 import numpy as np
+
+# Import centralized constants (SSOT)
+from config.constants import PLANCK_H0, PLANCK_OMEGA_M, PLANCK_OMEGA_LAMBDA, SHOES_H0
 
 
 # ============================================================================
@@ -37,12 +45,12 @@ class MultiResolutionRequest(BaseModel):
     )
 
     cosmo_params_planck: Dict[str, float] = Field(
-        default={'h0': 67.4, 'omega_m': 0.315, 'omega_lambda': 0.685},
+        default={'h0': PLANCK_H0, 'omega_m': PLANCK_OMEGA_M, 'omega_lambda': PLANCK_OMEGA_LAMBDA},
         description="Planck cosmological parameters"
     )
 
     cosmo_params_shoes: Dict[str, float] = Field(
-        default={'h0': 73.04, 'omega_m': 0.300, 'omega_lambda': 0.700},
+        default={'h0': SHOES_H0, 'omega_m': 0.300, 'omega_lambda': 0.700},
         description="SH0ES cosmological parameters"
     )
 
@@ -275,7 +283,7 @@ async def multiresolution_merge(
     **Example:**
     ```json
     {
-      "planck_chain": [[67.4, 0.315, ...], ...],
+      "planck_chain": [[67.36, 0.315, ...], ...],
       "shoes_chain": [[73.04, 180.0, 45.0, 100.0, ...], ...],
       "resolution_schedule": [8, 12, 16, 20, 24, 28, 32]
     }
@@ -305,7 +313,7 @@ payload = {
     "planck_chain": planck_chain.tolist(),
     "shoes_chain": shoes_chain.tolist(),
     "cosmo_params_planck": {
-        "h0": 67.4,
+        "h0": 67.36,
         "omega_m": 0.315,
         "omega_lambda": 0.685
     },

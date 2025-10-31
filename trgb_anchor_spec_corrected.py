@@ -5,6 +5,8 @@ TRGB Anchor Specification - Corrected with Proper Horizon Normalization
 Using UHA specification: R_H(a ≈ 1) ≈ 14,000 Mpc
 Δr = R_H / 2^N per axis
 
+REFACTORED: Now uses centralized SSOT configuration
+
 Author: Eric D. Martin (All Your Baseline LLC)
 Date: 2025-10-30
 """
@@ -13,10 +15,13 @@ import numpy as np
 import json
 import math
 
-# UHA Specification Constants
-R_H_TODAY = 14000.0  # Mpc, horizon size at a ≈ 1
+# Import centralized constants (SSOT)
+from config.constants import HORIZON_SIZE_TODAY_MPC
 
-def calculate_resolution_bits(scale_mpc: float, horizon_mpc: float = R_H_TODAY) -> dict:
+# UHA Specification Constants
+R_H_TODAY = HORIZON_SIZE_TODAY_MPC  # Mpc, horizon size at a ≈ 1
+
+def calculate_resolution_bits(scale_mpc: float, horizon_mpc: float = None) -> dict:
     """
     Calculate appropriate UHA resolution bits for a given measurement scale.
 
@@ -28,11 +33,14 @@ def calculate_resolution_bits(scale_mpc: float, horizon_mpc: float = R_H_TODAY) 
 
     Args:
         scale_mpc: Measurement scale (e.g., 30 Mpc for TRGB)
-        horizon_mpc: Horizon size (default: 14,000 Mpc at a≈1)
+        horizon_mpc: Horizon size (default: centralized HORIZON_SIZE_TODAY_MPC)
 
     Returns:
         dict with resolution analysis
     """
+    if horizon_mpc is None:
+        horizon_mpc = R_H_TODAY
+
     # Target cell size: ~1/20 of measurement scale
     delta_r_target = scale_mpc / 20.0
 

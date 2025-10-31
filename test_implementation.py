@@ -5,6 +5,9 @@ Test Implementation Harness for Multi-Resolution Hubble Tension Validation
 This module provides automated test runners for validating the multi-resolution
 UHA tensor calibration method that resolves the Hubble tension from 5σ to 0.966σ.
 
+REFACTORED: Now uses centralized SSOT configuration where appropriate
+Note: Test expectations preserved as local constants (test-specific)
+
 Author: Eric D. Martin (All Your Baseline LLC)
 Date: 2025-10-30
 Status: Ready for testing
@@ -17,6 +20,9 @@ from dataclasses import dataclass, field
 from enum import Enum
 import sys
 from pathlib import Path
+
+# Import centralized constants (SSOT)
+from config.constants import PLANCK_H0, PLANCK_SIGMA_H0, SHOES_H0
 
 # Import the multi-resolution engine
 sys.path.append(str(Path(__file__).parent))
@@ -107,13 +113,23 @@ class TestSuite:
 # ============================================================================
 
 def generate_mock_planck_samples(n_samples: int = 5000,
-                                 H0_true: float = 67.36,
-                                 sigma_H0: float = 0.54) -> np.ndarray:
+                                 H0_true: float = None,
+                                 sigma_H0: float = None) -> np.ndarray:
     """
     Generate mock Planck CMB chain samples
 
+    Args:
+        n_samples: Number of samples to generate
+        H0_true: True H0 value (defaults to PLANCK_H0)
+        sigma_H0: H0 uncertainty (defaults to PLANCK_SIGMA_H0)
+
     Returns: Array of shape (n_samples, 4) with columns [H0, Omega_m, Omega_Lambda, sigma_8]
     """
+    if H0_true is None:
+        H0_true = PLANCK_H0
+    if sigma_H0 is None:
+        sigma_H0 = PLANCK_SIGMA_H0
+
     samples = np.zeros((n_samples, 4))
     samples[:, 0] = np.random.normal(H0_true, sigma_H0, n_samples)  # H0
     samples[:, 1] = np.random.normal(0.315, 0.007, n_samples)        # Omega_m
@@ -123,7 +139,7 @@ def generate_mock_planck_samples(n_samples: int = 5000,
 
 
 def generate_mock_shoes_samples(n_samples: int = 1000,
-                                H0_true: float = 73.04,
+                                H0_true: float = None,
                                 sigma_H0: float = 1.04,
                                 add_systematic: Optional[Dict] = None) -> np.ndarray:
     """
@@ -131,12 +147,15 @@ def generate_mock_shoes_samples(n_samples: int = 1000,
 
     Args:
         n_samples: Number of samples to generate
-        H0_true: True H0 value (before systematics)
+        H0_true: True H0 value (defaults to SHOES_H0, before systematics)
         sigma_H0: Statistical uncertainty
         add_systematic: Dict with keys 'scale_mpc', 'bias_percent', 'systematic_type'
 
     Returns: Array of shape (n_samples, 4) with columns [H0, Omega_m, distance, redshift]
     """
+    if H0_true is None:
+        H0_true = SHOES_H0
+
     samples = np.zeros((n_samples, 4))
 
     # Base H0 measurements

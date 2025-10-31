@@ -2,6 +2,12 @@
 """
 Cross-Validation Comparison: KiDS-1000 vs DES-Y3
 Verify consistent (1+z)^(-0.5) pattern across independent surveys
+
+REFACTORED: Reviewed for SSOT compliance
+Note: No hardcoded constants found - loads data from JSON files
+
+Author: Eric D. Martin (All Your Baseline LLC)
+Date: 2025-10-30
 """
 
 import numpy as np
