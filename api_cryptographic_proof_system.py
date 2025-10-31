@@ -6,12 +6,24 @@ Self-Contained API-Based Cryptographic Proof System
 Three-Survey Cross-Validation (KiDS-1000 + DES-Y3 + HSC-Y3) with h32 Resolution
 Uses UHA Encoder API instead of local implementation - NO PATENT-PROTECTED CODE
 
+REFACTORED: Now uses centralized SSOT configuration
+============================================
+This file has been refactored to use Single Source of Truth (SSOT) architecture:
+  - config.api: API endpoints and configuration
+  - config.constants: Cosmological parameters (Planck 2018)
+  - config.surveys: Survey metadata (KiDS, DES, HSC)
+  - config.corrections: Correction formulas and baselines
+
+All hardcoded values replaced with imports from centralized modules.
+Ensures consistency, reproducibility, and academic rigor.
+
 FEATURES:
 - Auto-requests API key every 60 seconds (max 1/minute)
 - Generates cryptographic proofs (SHA3-512)
 - Self-contained: single file, no local UHA encoder
 - Three-survey h32 cross-validation
 - Complete audit trail with timestamps
+- Centralized configuration (SSOT)
 
 API ENDPOINTS:
 - Token request: https://got.gitgap.org/api/request-token
@@ -37,15 +49,18 @@ import numpy as np
 
 
 # ==============================================================================
-# Configuration
+# Configuration - Using centralized config (SSOT)
 # ==============================================================================
 
-API_BASE_URL = "https://got.gitgap.org"
-TOKEN_ENDPOINT = f"{API_BASE_URL}/api/request-token"
-UHA_ENCODE_ENDPOINT = f"{API_BASE_URL}/uha/encode"
+# Import centralized API configuration
+from config.api import (
+    API_BASE_URL,
+    TOKEN_ENDPOINT,
+    UHA_ENCODE_ENDPOINT,
+    API_KEY_REQUEST_INTERVAL_SECONDS as API_KEY_REQUEST_INTERVAL
+)
 
-# API key request configuration
-API_KEY_REQUEST_INTERVAL = 60  # seconds (hard-coded to 1 minute max)
+# API key caching
 LAST_API_KEY_REQUEST_TIME = 0  # Track last request time
 CURRENT_API_KEY = None  # Cache current API key
 
@@ -164,10 +179,12 @@ def encode_uha_api(
         UHA address string
     """
     if cosmo_params is None:
+        # Use centralized Planck 2018 cosmological parameters
+        from config.constants import PLANCK_H0, PLANCK_OMEGA_M, PLANCK_OMEGA_LAMBDA
         cosmo_params = {
-            'h0': 67.36,
-            'omega_m': 0.315,
-            'omega_lambda': 0.685
+            'h0': PLANCK_H0,
+            'omega_m': PLANCK_OMEGA_M,
+            'omega_lambda': PLANCK_OMEGA_LAMBDA
         }
 
     api_key = get_api_key()
@@ -218,54 +235,67 @@ def compute_result_hash(results: Dict) -> str:
 
 
 # ==============================================================================
-# Three-Survey Data (Simulated for Demo)
+# Three-Survey Data - Using centralized survey metadata (SSOT)
 # ==============================================================================
 
 def get_survey_data():
     """
-    Get three-survey weak lensing data.
+    Get three-survey weak lensing data from centralized config.
 
     NOTE: This uses simulated data calibrated to published S₈ values.
     Replace with real FITS data for production.
+
+    Returns data structure compatible with original format while using
+    centralized survey metadata from config.surveys module.
     """
+    # Import centralized survey metadata
+    from config.surveys import KIDS_1000, DES_Y3, HSC_Y3
 
-    # KiDS-1000 (5 bins, z=0.1-1.2)
+    # KiDS-1000 - Build from centralized metadata
     kids_data = {
-        'survey': 'KiDS-1000',
-        'telescope': 'VST/ESO',
-        'area_deg2': 1000,
+        'survey': KIDS_1000.name,
+        'telescope': KIDS_1000.telescope,
+        'area_deg2': KIDS_1000.area_deg2,
         'bins': [
-            {'z_eff': 0.1, 'z_min': 0.1, 'z_max': 0.3, 'S8_initial': 0.759},
-            {'z_eff': 0.4, 'z_min': 0.3, 'z_max': 0.5, 'S8_initial': 0.759},
-            {'z_eff': 0.6, 'z_min': 0.5, 'z_max': 0.7, 'S8_initial': 0.759},
-            {'z_eff': 0.8, 'z_min': 0.7, 'z_max': 0.9, 'S8_initial': 0.759},
-            {'z_eff': 1.0, 'z_min': 0.9, 'z_max': 1.2, 'S8_initial': 0.759},
+            {
+                'z_eff': KIDS_1000.z_effective[i],
+                'z_min': KIDS_1000.z_bins[i][0],
+                'z_max': KIDS_1000.z_bins[i][1],
+                'S8_initial': KIDS_1000.S8_measured
+            }
+            for i in range(len(KIDS_1000.z_bins))
         ]
     }
 
-    # DES-Y3 (4 bins, z=0.2-1.05)
+    # DES-Y3 - Build from centralized metadata
     des_data = {
-        'survey': 'DES-Y3',
-        'telescope': 'Blanco/CTIO',
-        'area_deg2': 4100,
+        'survey': DES_Y3.name,
+        'telescope': DES_Y3.telescope,
+        'area_deg2': DES_Y3.area_deg2,
         'bins': [
-            {'z_eff': 0.3, 'z_min': 0.2, 'z_max': 0.43, 'S8_initial': 0.776},
-            {'z_eff': 0.5, 'z_min': 0.43, 'z_max': 0.63, 'S8_initial': 0.776},
-            {'z_eff': 0.7, 'z_min': 0.63, 'z_max': 0.90, 'S8_initial': 0.776},
-            {'z_eff': 0.95, 'z_min': 0.90, 'z_max': 1.05, 'S8_initial': 0.776},
+            {
+                'z_eff': DES_Y3.z_effective[i],
+                'z_min': DES_Y3.z_bins[i][0],
+                'z_max': DES_Y3.z_bins[i][1],
+                'S8_initial': DES_Y3.S8_measured
+            }
+            for i in range(len(DES_Y3.z_bins))
         ]
     }
 
-    # HSC-Y3 (4 bins, z=0.3-1.5)
+    # HSC-Y3 - Build from centralized metadata
     hsc_data = {
-        'survey': 'HSC-Y3',
-        'telescope': 'Subaru/Hawaii',
-        'area_deg2': 416,
+        'survey': HSC_Y3.name,
+        'telescope': HSC_Y3.telescope,
+        'area_deg2': HSC_Y3.area_deg2,
         'bins': [
-            {'z_eff': 0.4, 'z_min': 0.3, 'z_max': 0.6, 'S8_initial': 0.780},
-            {'z_eff': 0.75, 'z_min': 0.6, 'z_max': 0.9, 'S8_initial': 0.780},
-            {'z_eff': 1.1, 'z_min': 0.9, 'z_max': 1.2, 'S8_initial': 0.780},
-            {'z_eff': 1.35, 'z_min': 1.2, 'z_max': 1.5, 'S8_initial': 0.780},
+            {
+                'z_eff': HSC_Y3.z_effective[i],
+                'z_min': HSC_Y3.z_bins[i][0],
+                'z_max': HSC_Y3.z_bins[i][1],
+                'S8_initial': HSC_Y3.S8_measured
+            }
+            for i in range(len(HSC_Y3.z_bins))
         ]
     }
 
@@ -302,12 +332,13 @@ def analyze_survey_h32_api(survey_data: Dict, resolution_schedule: List[int]) ->
         z_eff = bin_data['z_eff']
         print(f"\n  Bin {i}: z_eff = {z_eff:.2f}")
 
-        # Compute expected correction from (1+z)^(-0.5) pattern
-        z_factor = (1 + z_eff)**(-0.5)
-        baseline = 0.0200  # Universal baseline from three-survey fit
-        correction = baseline * z_factor
+        # Compute expected correction from (1+z)^(-0.5) pattern using centralized formula
+        from config.corrections import UNIVERSAL_BASELINE, calculate_s8_correction
 
-        print(f"    Pattern: ΔS₈ = {baseline:.4f} × (1+{z_eff})^(-0.5)")
+        z_factor = (1 + z_eff)**(-0.5)
+        correction = calculate_s8_correction(z_eff)  # Uses centralized formula
+
+        print(f"    Pattern: ΔS₈ = {UNIVERSAL_BASELINE:.4f} × (1+{z_eff})^(-0.5)")
         print(f"    Correction: {correction:+.4f}")
 
         # UHA encoding at h32 (optional - for proof of API usage)
@@ -365,8 +396,8 @@ def analyze_survey_h32_api(survey_data: Dict, resolution_schedule: List[int]) ->
         'total_correction': total_correction,
         'bin_results': bin_results,
         'pattern': {
-            'formula': 'ΔS₈(z) = 0.0200 × (1+z)^(-0.5)',
-            'baseline': 0.0200,
+            'formula': f'ΔS₈(z) = {UNIVERSAL_BASELINE:.4f} × (1+z)^(-0.5)',
+            'baseline': UNIVERSAL_BASELINE,
             'scaling': '(1+z)^(-0.5)'
         }
     }

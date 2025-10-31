@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-10-30T21:28:46.182053+00:00",
+  "timestamp": "2025-10-31T01:55:24.401545+00:00",
   "analysis_type": "three_survey_h32_api_validation",
   "api_endpoints": {
     "token": "https://got.gitgap.org/api/request-token",
@@ -8,8 +8,8 @@
   "surveys": {
     "kids": {
       "survey": "KiDS-1000",
-      "telescope": "VST/ESO",
-      "area_deg2": 1000,
+      "telescope": "VST",
+      "area_deg2": 1000.0,
       "n_bins": 5,
       "resolution_schedule": [
         8,
@@ -85,8 +85,8 @@
     },
     "des": {
       "survey": "DES-Y3",
-      "telescope": "Blanco/CTIO",
-      "area_deg2": 4100,
+      "telescope": "Blanco 4m",
+      "area_deg2": 4143.0,
       "n_bins": 4,
       "resolution_schedule": [
         8,
@@ -151,8 +151,8 @@
     },
     "hsc": {
       "survey": "HSC-Y3",
-      "telescope": "Subaru/Hawaii",
-      "area_deg2": 416,
+      "telescope": "Subaru 8.2m",
+      "area_deg2": 416.0,
       "n_bins": 4,
       "resolution_schedule": [
         8,

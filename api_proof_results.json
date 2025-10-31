@@ -1,10 +1,10 @@
 {
   "proof_version": "2.0",
   "proof_type": "API_BASED_THREE_SURVEY_H32",
-  "timestamp": "2025-10-30T21:28:46.182990+00:00",
+  "timestamp": "2025-10-31T01:55:24.402383+00:00",
   "hashes": {
-    "sha3_512": "ae0c63368013798844566270ff707f1157a3c8b027bf2801f9110e0c22f0677ff0cf1c9cc915244b144e6a052f506ddab0b10072b9c69739b9833a23180f4f9f",
-    "sha256": "e302b082abee804bb77053891b6bd8b1a31b40242d8a5767e66c53076d8d708c",
+    "sha3_512": "840fbc8b5b27a21ae6e42cd048b78dd1b806abd9013f4fe765c34cd57ed65b00a53af4be76d35120519393e3453e0601a69d795283c2fc41bdc5556ebfac78a2",
+    "sha256": "ad1f812a2b082069f2c05f908e10bd9e37cbdc0926fee114b81f28b50d730f32",
     "algorithm": "SHA3-512 (primary), SHA-256 (compatibility)"
   },
   "api_endpoints": {
@@ -20,7 +20,7 @@
   },
   "verification": {
     "method": "Recompute SHA3-512 of results JSON",
-    "expected_hash": "ae0c63368013798844566270ff707f1157a3c8b027bf2801f9110e0c22f0677ff0cf1c9cc915244b144e6a052f506ddab0b10072b9c69739b9833a23180f4f9f",
+    "expected_hash": "840fbc8b5b27a21ae6e42cd048b78dd1b806abd9013f4fe765c34cd57ed65b00a53af4be76d35120519393e3453e0601a69d795283c2fc41bdc5556ebfac78a2",
     "command": "python3 -c \"import json,hashlib; data=json.load(open('three_survey_api_validation.json')); print(hashlib.sha3_512(json.dumps(data,sort_keys=True,indent=2).encode()).hexdigest())\""
   }
 }
