@@ -22,7 +22,7 @@ import sys
 from pathlib import Path
 
 # Import centralized constants (SSOT)
-from config.constants import PLANCK_H0, PLANCK_SIGMA_H0, SHOES_H0
+from config.constants import PLANCK_H0, PLANCK_H0_SIGMA, SHOES_H0
 
 # Import the multi-resolution engine
 sys.path.append(str(Path(__file__).parent))
@@ -121,14 +121,14 @@ def generate_mock_planck_samples(n_samples: int = 5000,
     Args:
         n_samples: Number of samples to generate
         H0_true: True H0 value (defaults to PLANCK_H0)
-        sigma_H0: H0 uncertainty (defaults to PLANCK_SIGMA_H0)
+        sigma_H0: H0 uncertainty (defaults to PLANCK_H0_SIGMA)
 
     Returns: Array of shape (n_samples, 4) with columns [H0, Omega_m, Omega_Lambda, sigma_8]
     """
     if H0_true is None:
         H0_true = PLANCK_H0
     if sigma_H0 is None:
-        sigma_H0 = PLANCK_SIGMA_H0
+        sigma_H0 = PLANCK_H0_SIGMA
 
     samples = np.zeros((n_samples, 4))
     samples[:, 0] = np.random.normal(H0_true, sigma_H0, n_samples)  # H0
