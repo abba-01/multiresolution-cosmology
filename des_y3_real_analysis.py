@@ -3,6 +3,8 @@
 DES-Y3 Real Data Analysis
 Multi-resolution refinement on actual DES Y3 weak lensing survey data
 
+REFACTORED: Now uses centralized SSOT configuration (Phase 2)
+
 This implements cross-validation with KiDS-1000 using real DES correlation functions
 
 ================================================================================

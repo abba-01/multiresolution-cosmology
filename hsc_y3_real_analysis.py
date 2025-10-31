@@ -3,6 +3,8 @@
 HSC-Y3 Real Data Analysis
 Multi-resolution refinement on HSC Y3 weak lensing survey data
 
+REFACTORED: Now uses centralized SSOT configuration (Phase 2)
+
 Third independent survey for cross-validation with KiDS-1000 and DES-Y3
 
 ================================================================================
