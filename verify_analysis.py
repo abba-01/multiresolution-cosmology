@@ -2,6 +2,12 @@
 """
 Independent Verification of Analysis Results
 Checks all key statistical calculations
+
+REFACTORED: Reviewed for SSOT compliance
+Note: Test expectation values kept as local constants (test-specific)
+
+Author: Eric D. Martin (All Your Baseline LLC)
+Date: 2025-10-30
 """
 
 import numpy as np

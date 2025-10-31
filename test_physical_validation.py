@@ -8,6 +8,8 @@ Tests that validate physical consistency:
 - LSS alignment
 - Scale-dependent systematic decomposition
 
+REFACTORED: Now uses centralized SSOT configuration
+
 Author: Eric D. Martin (All Your Baseline LLC)
 Date: 2025-10-30
 """
@@ -17,6 +19,9 @@ import json
 from pathlib import Path
 from typing import Dict, List, Tuple
 from dataclasses import dataclass
+
+# Import centralized constants (SSOT)
+from config.constants import SPEED_OF_LIGHT_KM_S
 
 
 @dataclass
@@ -56,8 +61,8 @@ class TestPhysicalValidation:
         # Convert ΔT to equivalent velocity systematic
         # ΔT ≈ (v_sys / c) * calibration_factor
         # For H0 ~ 70 km/s/Mpc, v_sys ~ 300 km/s → ΔH0 ~ 1 km/s/Mpc → ΔT ~ 0.1
-        c = 3e5  # km/s
-        H0 = 70.0  # km/s/Mpc
+        c = SPEED_OF_LIGHT_KM_S  # km/s
+        H0 = 70.0  # km/s/Mpc (test expectation)
 
         # Calibration: ΔT = 0.1 corresponds to v_sys ~ 300 km/s
         v_sys_recovered = (delta_T_reduction / 0.1) * 300.0  # km/s

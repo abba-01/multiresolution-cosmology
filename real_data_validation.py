@@ -8,8 +8,13 @@ Validates method on real weak lensing surveys:
 - DES-Y3 (Abbott et al. 2022)
 - HSC-Y3 (Li et al. 2023)
 
+REFACTORED: Now uses centralized SSOT configuration
+
 Priority: HIGH - Critical path to publication
 Status: STUB - Needs implementation
+
+Author: Eric D. Martin (All Your Baseline LLC)
+Date: 2025-10-30
 """
 
 import numpy as np
@@ -17,6 +22,13 @@ from typing import Dict, List, Tuple, Optional
 from dataclasses import dataclass
 import json
 import hashlib
+
+# Import centralized constants (SSOT)
+from config.constants import (
+    PLANCK_H0, PLANCK_OMEGA_M, PLANCK_OMEGA_LAMBDA, PLANCK_S8, PLANCK_SIGMA_S8,
+    SPEED_OF_LIGHT_KM_S, HORIZON_SIZE_TODAY_MPC
+)
+from config.surveys import KIDS_S8, DES_S8, HSC_S8
 
 
 @dataclass
@@ -36,7 +48,7 @@ KIDS_1000 = SurveyConfig(
     name="KiDS-1000",
     coverage_deg2=1000.0,
     z_bins=[(0.1, 0.3), (0.3, 0.5), (0.5, 0.7), (0.7, 0.9), (0.9, 1.2)],
-    S8_measured=0.759,
+    S8_measured=KIDS_S8,
     sigma_S8=0.024,
     data_url="http://kids.strw.leidenuniv.nl/DR4/",
     reference="Asgari et al. 2021"
@@ -46,7 +58,7 @@ DES_Y3 = SurveyConfig(
     name="DES-Y3",
     coverage_deg2=4143.0,
     z_bins=[(0.2, 0.4), (0.4, 0.6), (0.6, 0.85), (0.85, 1.05)],
-    S8_measured=0.776,
+    S8_measured=DES_S8,
     sigma_S8=0.017,
     data_url="https://des.ncsa.illinois.edu/releases/y3a2",
     reference="Abbott et al. 2022"
@@ -84,7 +96,7 @@ def calculate_resolution_for_angular_scale(
     # where D_A(z) is angular diameter distance
 
     # Simplified calculation (full implementation needs cosmology module)
-    c = 299792.458  # km/s
+    c = SPEED_OF_LIGHT_KM_S  # km/s
     H0 = cosmo_params['h0']  # km/s/Mpc
 
     # Hubble distance
@@ -107,7 +119,7 @@ def calculate_resolution_for_angular_scale(
     # Calculate resolution bits
     # N = ceil(log2(R_H / Δr_target))
     # where Δr_target ≈ scale / 20
-    R_H = 14000.0  # Mpc
+    R_H = HORIZON_SIZE_TODAY_MPC  # Mpc
     delta_r_target = scale_mpc / 20.0
     N_bits = int(np.ceil(np.log2(R_H / delta_r_target)))
 
@@ -272,9 +284,9 @@ def validate_all_surveys(
     """
     if cosmo_params is None:
         cosmo_params = {
-            'h0': 67.36,
-            'omega_m': 0.315,
-            'omega_lambda': 0.685
+            'h0': PLANCK_H0,
+            'omega_m': PLANCK_OMEGA_M,
+            'omega_lambda': PLANCK_OMEGA_LAMBDA
         }
 
     print(f"\n{'='*80}")
@@ -313,8 +325,8 @@ def validate_all_surveys(
     print(f"{'Survey':<15} {'S₈ initial':<12} {'S₈ final':<12} {'ΔS₈':<10} {'Tension'}")
     print(f"{'-'*65}")
 
-    planck_S8 = 0.834
-    planck_sigma = 0.016
+    planck_S8 = PLANCK_S8
+    planck_sigma = PLANCK_SIGMA_S8
 
     for survey_name, survey_result in results['surveys'].items():
         S8_init = survey_result['S8_initial']

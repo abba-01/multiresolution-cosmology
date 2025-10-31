@@ -2,6 +2,12 @@
 """
 Validate the Cross-Survey Consistency Test
 Check that the statistical test is sound and the threshold is appropriate
+
+REFACTORED: Reviewed for SSOT compliance
+Note: No hardcoded constants found - test loads data from JSON files
+
+Author: Eric D. Martin (All Your Baseline LLC)
+Date: 2025-10-30
 """
 
 import numpy as np
