@@ -3,12 +3,20 @@
 Joint ΛCDM Fit: Multi-Probe Concordance
 Combining Planck CMB, lensing, BAO, and corrected weak lensing surveys
 
+REFACTORED: Now uses centralized SSOT configuration
+
 Demonstrates full concordance under standard ΛCDM after multi-resolution corrections
+
+Author: Eric D. Martin (All Your Baseline LLC)
+Date: 2025-10-30
 """
 
 import numpy as np
 import json
 from typing import Dict, List, Tuple
+
+# Import centralized constants (SSOT)
+from config.constants import PLANCK_H0, PLANCK_SIGMA_H0, PLANCK_OMEGA_M, PLANCK_SIGMA_OMEGA_M, PLANCK_S8, PLANCK_SIGMA_S8
 
 # Load cross-survey validation results
 with open('cross_survey_validation_results.json', 'r') as f:
@@ -17,12 +25,12 @@ with open('cross_survey_validation_results.json', 'r') as f:
 # Observational constraints
 PROBES = {
     'Planck_CMB': {
-        'H0': 67.36,
-        'H0_sigma': 0.54,
-        'Omega_m': 0.315,
-        'Omega_m_sigma': 0.007,
-        'S8': 0.834,
-        'S8_sigma': 0.016,
+        'H0': PLANCK_H0,
+        'H0_sigma': PLANCK_SIGMA_H0,
+        'Omega_m': PLANCK_OMEGA_M,
+        'Omega_m_sigma': PLANCK_SIGMA_OMEGA_M,
+        'S8': PLANCK_S8,
+        'S8_sigma': PLANCK_SIGMA_S8,
         'reference': 'Planck Collaboration 2020, A&A 641, A6',
         'type': 'CMB temperature + polarization'
     },

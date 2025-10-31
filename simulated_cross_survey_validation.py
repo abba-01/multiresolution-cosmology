@@ -3,17 +3,26 @@
 Cross-Survey Validation: DES-Y3 & HSC-Y3
 Using published S8 values + multi-resolution corrections from KiDS pattern
 
+REFACTORED: Now uses centralized SSOT configuration
+
 Status: Framework using published values (pending real data access)
+
+Author: Eric D. Martin (All Your Baseline LLC)
+Date: 2025-10-30
 """
 
 import numpy as np
 import json
 from typing import Dict, List, Tuple
 
+# Import centralized constants (SSOT)
+from config.constants import PLANCK_S8, PLANCK_SIGMA_S8
+from config.surveys import KIDS_S8, DES_S8, HSC_S8
+
 # Published S8 values from surveys
 SURVEYS = {
     'KiDS-1000': {
-        'S8_published': 0.759,
+        'S8_published': KIDS_S8,
         'sigma': 0.024,
         'z_bins': [(0.1, 0.3), (0.3, 0.5), (0.5, 0.7), (0.7, 0.9), (0.9, 1.2)],
         'z_eff': [0.20, 0.40, 0.60, 0.80, 1.05],
@@ -21,7 +30,7 @@ SURVEYS = {
         'status': 'REAL DATA VALIDATED'
     },
     'DES-Y3': {
-        'S8_published': 0.776,
+        'S8_published': DES_S8,
         'sigma': 0.017,
         'z_bins': [(0.2, 0.4), (0.4, 0.6), (0.6, 0.85), (0.85, 1.05)],
         'z_eff': [0.30, 0.50, 0.73, 0.95],
@@ -29,7 +38,7 @@ SURVEYS = {
         'status': 'PUBLISHED VALUES (pending data access)'
     },
     'HSC-Y3': {
-        'S8_published': 0.780,
+        'S8_published': HSC_S8,
         'sigma': 0.033,
         'z_bins': [(0.3, 0.6), (0.6, 0.9), (0.9, 1.2), (1.2, 1.5)],
         'z_eff': [0.45, 0.75, 1.05, 1.35],
@@ -39,8 +48,7 @@ SURVEYS = {
 }
 
 # Planck reference
-PLANCK_S8 = 0.834
-PLANCK_SIGMA = 0.016
+PLANCK_SIGMA = PLANCK_SIGMA_S8
 
 def calculate_redshift_dependent_correction(z_eff: float) -> float:
     """

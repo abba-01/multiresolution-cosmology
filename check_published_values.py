@@ -1,7 +1,19 @@
 #!/usr/bin/env python3
 """
 Verify that input values match published literature
+
+REFACTORED: Now uses centralized SSOT configuration
+
+Author: Eric D. Martin (All Your Baseline LLC)
+Date: 2025-10-30
 """
+
+# Import centralized constants (SSOT)
+from config.constants import (
+    PLANCK_H0, PLANCK_SIGMA_H0, PLANCK_OMEGA_M, PLANCK_SIGMA_OMEGA_M,
+    PLANCK_S8, PLANCK_SIGMA_S8
+)
+from config.surveys import KIDS_S8, DES_S8, HSC_S8
 
 print("="*80)
 print("VERIFYING PUBLISHED VALUES AGAINST LITERATURE")
@@ -10,30 +22,30 @@ print("="*80)
 # Published values we used
 input_values = {
     'KiDS-1000': {
-        'S8': 0.759,
+        'S8': KIDS_S8,
         'sigma': 0.024,
         'reference': 'Asgari et al. 2021, A&A 645, A104',
         'url': 'https://ui.adsabs.harvard.edu/abs/2021A%26A...645A.104A'
     },
     'DES-Y3': {
-        'S8': 0.776,
+        'S8': DES_S8,
         'sigma': 0.017,
         'reference': 'Abbott et al. 2022, PRD 105, 023520',
         'url': 'https://ui.adsabs.harvard.edu/abs/2022PhRvD.105b3520A'
     },
     'HSC-Y3': {
-        'S8': 0.780,
+        'S8': HSC_S8,
         'sigma': 0.033,
         'reference': 'Hikage et al. 2019, PASJ 71, 43',
         'url': 'https://ui.adsabs.harvard.edu/abs/2019PASJ...71...43H'
     },
     'Planck 2020 CMB': {
-        'H0': 67.36,
-        'H0_sigma': 0.54,
-        'S8': 0.834,
-        'S8_sigma': 0.016,
-        'Omega_m': 0.315,
-        'Omega_m_sigma': 0.007,
+        'H0': PLANCK_H0,
+        'H0_sigma': PLANCK_SIGMA_H0,
+        'S8': PLANCK_S8,
+        'S8_sigma': PLANCK_SIGMA_S8,
+        'Omega_m': PLANCK_OMEGA_M,
+        'Omega_m_sigma': PLANCK_SIGMA_OMEGA_M,
         'reference': 'Planck Collaboration 2020, A&A 641, A6',
         'url': 'https://ui.adsabs.harvard.edu/abs/2020A%26A...641A...6P'
     },
@@ -58,21 +70,21 @@ input_values = {
 # Known published values from literature
 literature_values = {
     'KiDS-1000': {
-        'S8': (0.759, 0.024),  # Asgari+2021 Table 3 (cosmic shear only)
+        'S8': (KIDS_S8, 0.024),  # Asgari+2021 Table 3 (cosmic shear only)
         'notes': 'Cosmic shear constraints from KiDS-1000, fiducial analysis'
     },
     'DES-Y3': {
-        'S8': (0.776, 0.017),  # Abbott+2022 PRD (cosmic shear only)
+        'S8': (DES_S8, 0.017),  # Abbott+2022 PRD (cosmic shear only)
         'notes': 'DES Y3 cosmic shear constraints, fiducial analysis'
     },
     'HSC-Y3': {
-        'S8': (0.780, 0.033),  # Hikage+2019 PASJ (approximate from paper)
+        'S8': (HSC_S8, 0.033),  # Hikage+2019 PASJ (approximate from paper)
         'notes': 'HSC Y3 cosmic shear, conservative estimate'
     },
     'Planck 2020': {
-        'H0': (67.36, 0.54),   # Planck+2020 TT,TE,EE+lowE
-        'S8': (0.834, 0.016),  # Planck+2020 TT,TE,EE+lowE
-        'Omega_m': (0.315, 0.007),
+        'H0': (PLANCK_H0, PLANCK_SIGMA_H0),   # Planck+2020 TT,TE,EE+lowE
+        'S8': (PLANCK_S8, PLANCK_SIGMA_S8),  # Planck+2020 TT,TE,EE+lowE
+        'Omega_m': (PLANCK_OMEGA_M, PLANCK_SIGMA_OMEGA_M),
         'notes': 'Planck 2018 TT,TE,EE+lowE (released 2020)'
     },
     'Planck Lensing': {
