@@ -3,10 +3,15 @@
 Parse HSC-Y3 Data
 Load HSC correlation functions (FITS or ASCII format)
 
+REFACTORED: Now uses centralized SSOT configuration
+
 Based on HSC Y3 data structure from:
 - Li et al. 2022, ApJ 929, 152
 - Dalal et al. 2023, PRD 108, 123519
 - Hikage et al. 2019, PASJ 71, 43 (Y1)
+
+Author: Eric D. Martin (All Your Baseline LLC)
+Date: 2025-10-30
 """
 
 from astropy.io import fits, ascii
@@ -16,6 +21,9 @@ from typing import Dict, List, Tuple
 import sys
 import os
 import glob
+
+# Import centralized constants (SSOT)
+from config.surveys import HSC_S8
 
 # Path to HSC data
 DATA_DIR = "./data/hsc_y3"
@@ -38,7 +46,7 @@ Z_BINS = [
 ]
 
 # Published S8 value for verification
-HSC_S8_PUBLISHED = 0.780
+HSC_S8_PUBLISHED = HSC_S8
 HSC_S8_SIGMA = 0.033
 
 

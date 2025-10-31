@@ -2,12 +2,21 @@
 """
 Parse Real KiDS-1000 FITS Data
 Load actual survey correlation functions and run multi-resolution analysis
+
+REFACTORED: Now uses centralized SSOT configuration
+
+Author: Eric D. Martin (All Your Baseline LLC)
+Date: 2025-10-30
 """
 
 from astropy.io import fits
 import numpy as np
 import json
 from typing import Dict, List, Tuple
+
+# Import centralized constants (SSOT)
+from config.constants import PLANCK_S8, PLANCK_SIGMA_S8
+from config.surveys import KIDS_S8
 
 # Path to real KiDS data
 DATA_DIR = "./data/kids1000/KiDS1000_cosmis_shear_data_release/data_fits"
@@ -104,7 +113,7 @@ def estimate_s8_from_real_kids_data(bins_data):
     correlation functions with theory predictions.
     """
     # Published KiDS-1000 result
-    S8 = 0.759
+    S8 = KIDS_S8
     sigma_S8 = 0.024
 
     print(f"\n{'='*80}")
@@ -129,8 +138,8 @@ def run_multiresolution_on_real_data(bins_data):
     S8_initial, sigma_initial = estimate_s8_from_real_kids_data(bins_data)
 
     # Planck comparison
-    planck_S8 = 0.834
-    planck_sigma = 0.016
+    planck_S8 = PLANCK_S8
+    planck_sigma = PLANCK_SIGMA_S8
 
     tension_initial = abs(S8_initial - planck_S8) / np.sqrt(
         sigma_initial**2 + planck_sigma**2

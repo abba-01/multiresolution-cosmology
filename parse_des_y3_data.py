@@ -3,8 +3,13 @@
 Parse DES-Y3 FITS Data
 Load DES correlation functions in same format as KiDS-1000
 
+REFACTORED: Now uses centralized SSOT configuration
+
 Based on DES Y3 data structure from Abbott et al. 2022, PRD 105, 023520
 Expected FITS file structure similar to DES Y1 (Troxel et al. 2018)
+
+Author: Eric D. Martin (All Your Baseline LLC)
+Date: 2025-10-30
 """
 
 from astropy.io import fits
@@ -13,6 +18,9 @@ import json
 from typing import Dict, List, Tuple
 import sys
 import os
+
+# Import centralized constants (SSOT)
+from config.surveys import DES_S8
 
 # Path to DES data
 DATA_DIR = "./data/des_y3"
@@ -34,7 +42,7 @@ Z_BINS = [
 ]
 
 # Published S8 value for verification
-DES_S8_PUBLISHED = 0.776
+DES_S8_PUBLISHED = DES_S8
 DES_S8_SIGMA = 0.017
 
 
