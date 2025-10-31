@@ -8,6 +8,8 @@ but track S₈ = σ₈ √(Ωₘ / 0.3) through the resolution schedule.
 This directly tests if the same method that resolved H₀ tension also
 resolves S₈ tension via scale-dependent systematic decomposition.
 
+REFACTORED: Now uses centralized SSOT configuration
+
 Author: Eric D. Martin (All Your Baseline LLC)
 Date: 2025-10-30
 """
@@ -32,18 +34,26 @@ except ImportError:
     print("Warning: multiresolution_uha_encoder not available")
     ENCODER_AVAILABLE = False
 
+# Import centralized constants (SSOT)
+from config.constants import (
+    PLANCK_S8,
+    PLANCK_S8_SIGMA,
+    PLANCK_OMEGA_M,
+    PLANCK_H0
+)
+
 
 # ============================================================================
 # S₈ Data and Parameters
 # ============================================================================
 
-# Planck 2018 (CMB)
+# Planck 2018 (CMB) - Using centralized values
 PLANCK_PARAMS = {
-    'Omega_m': 0.315,
+    'Omega_m': PLANCK_OMEGA_M,
     'sigma_8': 0.811,
-    'S8': 0.834,  # σ₈ √(Ωₘ / 0.3)
-    'sigma_S8': 0.016,
-    'H0': 67.36,
+    'S8': PLANCK_S8,
+    'sigma_S8': PLANCK_S8_SIGMA,
+    'H0': PLANCK_H0,
 }
 
 # Weak Lensing (KiDS-1000 + DES-Y3)

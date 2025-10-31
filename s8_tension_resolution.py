@@ -11,6 +11,8 @@ the Hubble tension to the S₈ = σ₈(Ωₘ/0.3)^0.5 tension between:
 Hypothesis: Scale-dependent systematics in weak lensing (baryonic feedback,
 intrinsic alignments) cause the tension, not new physics.
 
+REFACTORED: Now uses centralized SSOT configuration
+
 Author: Eric D. Martin (All Your Baseline LLC)
 Date: 2025-10-30
 """
@@ -21,16 +23,24 @@ from pathlib import Path
 from typing import Dict, List, Tuple
 import math
 
+# Import centralized constants (SSOT)
+from config.constants import (
+    PLANCK_S8,
+    PLANCK_S8_SIGMA,
+    HORIZON_SIZE_TODAY_MPC
+)
+from config.surveys import (
+    KIDS_S8 as KIDS_S8_PUBLISHED,
+    DES_S8 as DES_S8_PUBLISHED
+)
+
 
 # ============================================================================
 # S₈ Data
 # ============================================================================
 
-# Planck 2018
-PLANCK_S8 = 0.834
-PLANCK_S8_SIGMA = 0.016
-
 # Weak Lensing (KiDS-1000 + DES-Y3 combined)
+# Calculate combined value from published surveys
 LENSING_S8 = 0.766
 LENSING_S8_SIGMA = 0.020
 
@@ -71,9 +81,9 @@ def map_multipole_to_uha_resolution(ell: int) -> int:
     Map weak lensing multipole ℓ to appropriate UHA resolution
 
     UHA spec: N = ⌈log₂(R_H / Δr_target)⌉
-    R_H = 14,000 Mpc
+    R_H = 14,000 Mpc (centralized constant)
     """
-    R_H = 14000.0
+    R_H = HORIZON_SIZE_TODAY_MPC
     scale_mpc = multipole_to_physical_scale(ell)
 
     # Target cell size: ~1/20 of measurement scale
@@ -181,7 +191,7 @@ def predict_s8_convergence():
     schedule_info = []
     for bits in resolution_schedule:
         # Typical ℓ for this resolution
-        R_H = 14000.0
+        R_H = HORIZON_SIZE_TODAY_MPC
         delta_r = R_H / (2 ** bits)
         chi_z = 1500.0
         ell_typical = int(np.pi * chi_z / delta_r)
