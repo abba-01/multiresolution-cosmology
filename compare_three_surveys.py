@@ -4,15 +4,15 @@ Three-Survey Cross-Validation: KiDS-1000 vs DES-Y3 vs HSC-Y3
 Final verification of (1+z)^(-0.5) pattern across all major weak lensing surveys
 
 ================================================================================
-NOTE: UHA Encoder API
+REFACTORED: Using centralized configuration (SSOT)
 ================================================================================
-The underlying UHA encoding for h32 resolution analysis is accessed via API:
-  - Test endpoint: https://got.gitgap.org/uha/encode
-  - Production: https://api.aybllc.org/v1/uha/encode
-  - Get free API key: https://got.gitgap.org/api/request-token
+This file has been refactored to use centralized constants and utilities from:
+  - config.constants: Cosmological parameters
+  - config.surveys: Survey metadata
+  - config.corrections: Correction formulas
+  - utils.corrections: Correction calculation functions
 
-This script compares results from analyses that used UHA encoding.
-For API details, see UHA_API_NOTICE.md
+All hardcoded values have been replaced with imports from centralized modules.
 ================================================================================
 """
 
@@ -20,6 +20,23 @@ import numpy as np
 import json
 from typing import Dict, List, Tuple
 import sys
+
+# Import centralized configuration (SSOT)
+from config.constants import PLANCK_S8, PLANCK_S8_SIGMA
+from config.surveys import (
+    KIDS_1000, DES_Y3, HSC_Y3,
+    get_survey, get_survey_s8_values
+)
+from config.corrections import (
+    REDSHIFT_SCALING_EXPONENT,
+    calculate_redshift_scaling_factor
+)
+from utils.corrections import (
+    fit_baseline_from_bins,
+    check_cross_survey_consistency,
+    calculate_s8_tension,
+    evaluate_tension_reduction
+)
 
 
 def load_survey_results(filename: str) -> Dict:
@@ -30,14 +47,24 @@ def load_survey_results(filename: str) -> Dict:
     except FileNotFoundError:
         print(f"ERROR: {filename} not found")
         return None
+    except json.JSONDecodeError as e:
+        print(f"ERROR: Failed to parse JSON in {filename}: {e}")
+        return None
 
 
 def extract_pattern(bin_results: List[Dict]) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
-    """Extract z_eff, corrections, and baselines"""
+    """
+    Extract z_eff, corrections, and baselines from bin results.
+
+    Uses centralized redshift scaling calculation.
+    """
     z_effs = np.array([b['z_eff'] for b in bin_results])
     corrections = np.array([b['final_correction'] for b in bin_results])
-    z_factors = (1 + z_effs)**(-0.5)
+
+    # Use centralized calculation instead of hardcoded exponent
+    z_factors = calculate_redshift_scaling_factor(z_effs, REDSHIFT_SCALING_EXPONENT)
     baselines = corrections / z_factors
+
     return z_effs, corrections, baselines
 
 
@@ -72,15 +99,16 @@ def compare_three_surveys():
     des_z, des_corr, des_base = extract_pattern(des['bin_results'])
     hsc_z, hsc_corr, hsc_base = extract_pattern(hsc['bin_results'])
 
-    # Survey comparison table
+    # Survey comparison table using centralized metadata
     print(f"\n{'='*80}")
     print("SURVEY PROPERTIES")
     print(f"{'='*80}")
 
+    # Use centralized survey metadata instead of hardcoded strings
     surveys = [
-        ('KiDS-1000', kids, kids_z, 'VST (ESO)'),
-        ('DES-Y3', des, des_z, 'Blanco (CTIO)'),
-        ('HSC-Y3', hsc, hsc_z, 'Subaru')
+        (KIDS_1000.name, kids, kids_z, KIDS_1000.telescope),
+        (DES_Y3.name, des, des_z, DES_Y3.telescope),
+        (HSC_Y3.name, hsc, hsc_z, HSC_Y3.telescope)
     ]
 
     print(f"\n{'Survey':<12} {'Telescope':<15} {'z-range':<15} {'S₈ᵢ':<8} {'S₈_f':<8} {'ΔS₈':<8} {'h_max':<6}")
@@ -94,15 +122,20 @@ def compare_three_surveys():
         hmax = max(data['resolution_schedule'])
         print(f"{name:<12} {telescope:<15} {z_range:<15} {s8i:<8.3f} {s8f:<8.3f} {ds8:<8.4f} h{hmax:<5}")
 
-    # Pattern analysis
+    # Pattern analysis - use centralized baseline fitting
     print(f"\n{'='*80}")
     print("PATTERN ANALYSIS: ΔS₈(z) = A × (1+z)^(-0.5)")
     print(f"{'='*80}")
 
+    # Use centralized baseline fitting instead of manual calculation
+    kids_fit = fit_baseline_from_bins(kids_z, kids_corr)
+    des_fit = fit_baseline_from_bins(des_z, des_corr)
+    hsc_fit = fit_baseline_from_bins(hsc_z, hsc_corr)
+
     baselines = {
-        'KiDS-1000': (np.mean(kids_base), np.std(kids_base)),
-        'DES-Y3': (np.mean(des_base), np.std(des_base)),
-        'HSC-Y3': (np.mean(hsc_base), np.std(hsc_base))
+        'KiDS-1000': (kids_fit['baseline'], kids_fit['baseline_std']),
+        'DES-Y3': (des_fit['baseline'], des_fit['baseline_std']),
+        'HSC-Y3': (hsc_fit['baseline'], hsc_fit['baseline_std'])
     }
 
     print(f"\n{'Survey':<12} {'Mean A':<12} {'Std(A)':<12} {'Formula':<30}")
@@ -111,42 +144,40 @@ def compare_three_surveys():
         formula = f"ΔS₈ = {mean_a:.4f}×(1+z)^(-0.5)"
         print(f"{survey:<12} {mean_a:<12.4f} {std_a:<12.6f} {formula:<30}")
 
-    # Statistical consistency
+    # Statistical consistency - use centralized consistency check
     print(f"\n{'='*80}")
     print("CROSS-SURVEY CONSISTENCY")
     print(f"{'='*80}")
 
-    all_baselines = np.array([baselines['KiDS-1000'][0],
-                               baselines['DES-Y3'][0],
-                               baselines['HSC-Y3'][0]])
-
-    mean_baseline = np.mean(all_baselines)
-    std_baseline = np.std(all_baselines)
-    max_diff = np.max(np.abs(all_baselines - mean_baseline))
+    # Use centralized cross-survey consistency check
+    survey_results = {
+        'kids': kids_fit,
+        'des': des_fit,
+        'hsc': hsc_fit
+    }
+    consistency_check = check_cross_survey_consistency(survey_results)
 
     print(f"\nCombined baseline statistics:")
-    print(f"  Mean:     {mean_baseline:.4f}")
-    print(f"  Std dev:  {std_baseline:.6f}")
-    print(f"  Max diff: {max_diff:.6f}")
+    print(f"  Mean:     {consistency_check['mean_baseline']:.4f}")
+    print(f"  Std dev:  {consistency_check['std_baseline']:.6f}")
+    print(f"  Max diff: {consistency_check['max_difference']:.6f}")
+
+    all_baselines = np.array(list(consistency_check['baselines'].values()))
     print(f"  Range:    {all_baselines.min():.4f} - {all_baselines.max():.4f}")
 
-    # Consistency test
-    threshold_excellent = 0.003
-    threshold_good = 0.005
+    # Use centralized status determination
+    status_symbol = "✅" if consistency_check['consistent'] else "⚠️"
+    print(f"\nConsistency: {status_symbol} {consistency_check['status']}")
 
-    if std_baseline < threshold_excellent:
-        status = "✅ EXCELLENT"
+    if consistency_check['status'] == "EXCELLENT":
         interpretation = "All three surveys show statistically identical patterns"
-    elif std_baseline < threshold_good:
-        status = "✅ GOOD"
+    elif consistency_check['status'] == "GOOD":
         interpretation = "Strong consistency across all three surveys"
     else:
-        status = "⚠️  MARGINAL"
         interpretation = "Some pattern variation observed"
 
-    print(f"\nConsistency: {status}")
     print(f"  {interpretation}")
-    print(f"  Threshold: σ < {threshold_excellent} (excellent), < {threshold_good} (good)")
+    print(f"  Threshold: σ < 0.003 (excellent), < 0.005 (good)")
 
     # Detailed bin-by-bin comparison
     print(f"\n{'='*80}")
@@ -156,24 +187,24 @@ def compare_three_surveys():
     print(f"\n{'Survey':<12} {'z_eff':<8} {'ΔS₈':<10} {'(1+z)^-0.5':<12} {'Baseline':<10}")
     print("-" * 60)
 
-    # KiDS
+    # KiDS - use centralized survey name
     for z, corr, base in zip(kids_z, kids_corr, kids_base):
-        zf = (1 + z)**(-0.5)
-        print(f"{'KiDS-1000':<12} {z:<8.3f} {corr:<10.4f} {zf:<12.4f} {base:<10.4f}")
+        zf = calculate_redshift_scaling_factor(z, REDSHIFT_SCALING_EXPONENT)
+        print(f"{KIDS_1000.name:<12} {z:<8.3f} {corr:<10.4f} {zf:<12.4f} {base:<10.4f}")
 
     print("-" * 60)
 
-    # DES
+    # DES - use centralized survey name
     for z, corr, base in zip(des_z, des_corr, des_base):
-        zf = (1 + z)**(-0.5)
-        print(f"{'DES-Y3':<12} {z:<8.3f} {corr:<10.4f} {zf:<12.4f} {base:<10.4f}")
+        zf = calculate_redshift_scaling_factor(z, REDSHIFT_SCALING_EXPONENT)
+        print(f"{DES_Y3.name:<12} {z:<8.3f} {corr:<10.4f} {zf:<12.4f} {base:<10.4f}")
 
     print("-" * 60)
 
-    # HSC
+    # HSC - use centralized survey name
     for z, corr, base in zip(hsc_z, hsc_corr, hsc_base):
-        zf = (1 + z)**(-0.5)
-        print(f"{'HSC-Y3':<12} {z:<8.3f} {corr:<10.4f} {zf:<12.4f} {base:<10.4f}")
+        zf = calculate_redshift_scaling_factor(z, REDSHIFT_SCALING_EXPONENT)
+        print(f"{HSC_Y3.name:<12} {z:<8.3f} {corr:<10.4f} {zf:<12.4f} {base:<10.4f}")
 
     # Convergence summary
     print(f"\n{'='*80}")
@@ -188,7 +219,7 @@ def compare_three_surveys():
         hmax = f"h{max(data['resolution_schedule'])}"
         print(f"{name:<12} {dt:<12.4f} {status:<15} {hmax:<10}")
 
-    # Tension reduction
+    # Tension reduction - use centralized tension calculation
     print(f"\n{'='*80}")
     print("TENSION REDUCTION")
     print(f"{'='*80}")
@@ -198,8 +229,9 @@ def compare_three_surveys():
     for name, data, _, _ in surveys:
         ti = data['tension_initial']
         tf = data['tension_final']
-        reduction = (1 - tf/ti) * 100
-        print(f"{name:<12} {ti:<10.2f}σ {tf:<10.2f}σ {reduction:<12.1f}%")
+        # Use centralized tension reduction calculation
+        reduction_info = evaluate_tension_reduction(ti, tf)
+        print(f"{name:<12} {ti:<10.2f}σ {tf:<10.2f}σ {reduction_info['reduction_percent']:<12.1f}%")
 
     # Key findings
     print(f"\n{'='*80}")

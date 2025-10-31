@@ -59,11 +59,11 @@
           "test_name": "Local Anchor at Wrong (Coarse) Resolution",
           "status": "passed",
           "expected": "Resolution loss > 80%",
-          "actual": "Resolution loss = 97.8%",
+          "actual": "Resolution loss = 97.9%",
           "error_message": null,
           "execution_time": 0.0,
           "metadata": {
-            "resolution_loss_pct": 97.75280898876404
+            "resolution_loss_pct": 97.89473684210527
           }
         },
         {
@@ -71,12 +71,12 @@
           "test_name": "Single-Resolution Convergence Failure",
           "status": "passed",
           "expected": "\u0394H\u2080 > 3.0 km/s/Mpc (no convergence)",
-          "actual": "\u0394H\u2080 = 5.13 km/s/Mpc",
+          "actual": "\u0394H\u2080 = 5.12 km/s/Mpc",
           "error_message": null,
           "execution_time": 0.0,
           "metadata": {
-            "initial_delta_H0": 5.697088033655746,
-            "final_delta_H0": 5.127379230290171,
+            "initial_delta_H0": 5.685831377468162,
+            "final_delta_H0": 5.117248239721346,
             "improvement_pct": 10.0
           }
         }
@@ -98,14 +98,14 @@
           "test_name": "Three-Scale Systematic Recovery",
           "status": "passed",
           "expected": "Recovery error < 0.5 km/s/Mpc",
-          "actual": "Recovery error = 0.37 km/s/Mpc",
+          "actual": "Recovery error = 0.49 km/s/Mpc",
           "error_message": null,
           "execution_time": 0.0,
           "metadata": {
             "H0_true": 68.0,
-            "H0_observed": 69.27942161278972,
-            "H0_recovered": 68.36853536955617,
-            "recovery_error": 0.36853536955617017
+            "H0_observed": 69.31632634325408,
+            "H0_recovered": 67.50718607941262,
+            "recovery_error": 0.4928139205873805
           }
         },
         {
@@ -129,8 +129,8 @@
       "summary": {
         "pending": 0,
         "running": 0,
-        "passed": 1,
-        "failed": 1,
+        "passed": 2,
+        "failed": 0,
         "skipped": 0,
         "error": 0
       },
@@ -138,18 +138,18 @@
         {
           "test_id": "5A.1",
           "test_name": "Resolution Schedule Independence",
-          "status": "failed",
+          "status": "passed",
           "expected": "H\u2080 range < 0.5 km/s/Mpc across schedules",
-          "actual": "H\u2080 range = 0.56 km/s/Mpc",
+          "actual": "H\u2080 range = 0.43 km/s/Mpc",
           "error_message": null,
           "execution_time": 0.0,
           "metadata": {
             "H0_results": {
-              "conservative": 68.66329337717072,
-              "aggressive": 68.984405380374,
-              "fine_grained": 68.42449363762753
+              "conservative": 68.73799208550966,
+              "aggressive": 68.3266223630699,
+              "fine_grained": 68.3089201244791
             },
-            "H0_range": 0.5599117427464648
+            "H0_range": 0.42907196103055867
           }
         },
         {
@@ -184,12 +184,12 @@
           "test_name": "Bootstrap Resampling Stability",
           "status": "passed",
           "expected": "H\u2080 = 68.518 \u00b1 1.292 km/s/Mpc",
-          "actual": "H\u2080 = 68.50 \u00b1 1.11 km/s/Mpc",
+          "actual": "H\u2080 = 68.48 \u00b1 1.14 km/s/Mpc",
           "error_message": null,
           "execution_time": 0.0,
           "metadata": {
-            "H0_mean": 68.50405715919709,
-            "H0_std": 1.1104464775319467,
+            "H0_mean": 68.48012887505449,
+            "H0_std": 1.1407566134430693,
             "n_bootstrap": 100
           }
         },
@@ -198,15 +198,15 @@
           "test_name": "Convergence Threshold Independence",
           "status": "passed",
           "expected": "H\u2080 range < 0.5 km/s/Mpc across thresholds",
-          "actual": "H\u2080 range = 0.15 km/s/Mpc",
+          "actual": "H\u2080 range = 0.25 km/s/Mpc",
           "error_message": null,
           "execution_time": 0.0,
           "metadata": {
             "H0_results": {
-              "0.05": 68.3329944610282,
-              "0.1": 68.38796060189746,
-              "0.15": 68.47920101895168,
-              "0.2": 68.3684626170855
+              "0.05": 68.30962058165503,
+              "0.1": 68.4308125915084,
+              "0.15": 68.36399497571854,
+              "0.2": 68.56134860817433
             }
           }
         }

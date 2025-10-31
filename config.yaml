@@ -1,0 +1,141 @@
+# Multi-Resolution Cosmological Analysis Configuration
+# =====================================================
+
+# Analysis Configuration
+analysis:
+  # Default resolution schedule
+  default_resolution_schedule: full  # Options: full, short, conservative, aggressive, coarse
+
+  # Convergence thresholds
+  delta_t_threshold: 0.15  # Epistemic distance convergence threshold
+  max_iterations: 100
+
+  # Output settings
+  save_intermediate_results: true
+  output_directory: ./results
+
+# Survey Configuration
+surveys:
+  # Which surveys to include in cross-validation
+  enabled:
+    - kids
+    - des
+    - hsc
+
+  # Bin selection (null = use all bins)
+  kids_bins: null
+  des_bins: null
+  hsc_bins: null
+
+# Cosmology Parameters
+cosmology:
+  # Default cosmology to use (planck, shoes, or custom)
+  default: planck
+
+  # Custom cosmology (if default=custom)
+  custom:
+    h0: 67.36
+    omega_m: 0.315
+    omega_lambda: 0.685
+
+# API Configuration
+api:
+  # Timeout settings (seconds)
+  connection_timeout: 30
+  read_timeout: 60
+
+  # Retry configuration
+  max_retries: 3
+  retry_base_delay: 2.0
+  retry_max_delay: 60.0
+
+  # Rate limiting
+  respect_rate_limits: true
+  api_key_cache_duration: 3600  # seconds
+
+# Validation Settings
+validation:
+  # Strict validation (raises errors on invalid inputs)
+  strict_mode: true
+
+  # Check cosmology parameters for flat universe
+  require_flat_universe: true
+
+  # Maximum array sizes (prevent DoS)
+  max_mcmc_chain_size: 50000
+  max_api_response_size_mb: 10
+
+# Logging Configuration
+logging:
+  level: INFO  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+  # Log to file
+  log_to_file: true
+  log_file: multiresolution.log
+  max_file_size_mb: 10
+  backup_count: 5
+
+  # Log to console
+  log_to_console: true
+
+# Testing Configuration
+testing:
+  # Use demo/simulated data for testing
+  use_demo_data: true
+
+  # Random seed for reproducibility
+  random_seed: 42
+
+  # Test data directory
+  test_data_dir: ./data/test
+
+# Performance Settings
+performance:
+  # Parallel processing
+  enable_parallel: false
+  num_workers: 4
+
+  # Caching
+  enable_caching: true
+  cache_directory: ./.cache
+
+  # Memory limits
+  max_memory_mb: 4096
+
+# Output Formatting
+output:
+  # Decimal places for different parameters
+  decimal_places:
+    h0: 2
+    s8: 3
+    corrections: 4
+    tension: 2
+
+  # Include uncertainties in output
+  include_uncertainties: true
+
+  # Generate plots
+  generate_plots: false
+  plot_format: png  # png, pdf, svg
+
+# Security Settings
+security:
+  # Validate all API responses
+  validate_api_responses: true
+
+  # Maximum request size
+  max_request_size_mb: 10
+
+  # Allowed API endpoints (for safety)
+  allowed_api_hosts:
+    - got.gitgap.org
+    - api.aybllc.org
+
+# Experimental Features
+experimental:
+  # Enable experimental features (use with caution)
+  enabled: false
+
+  # Specific experimental features
+  features: []
