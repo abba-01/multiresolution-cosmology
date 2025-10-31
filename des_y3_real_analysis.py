@@ -47,10 +47,15 @@ import sys
 DES_S8_PUBLISHED = 0.776
 DES_S8_SIGMA = 0.017
 
-# Planck 2018 cosmology for comparison
-PLANCK_S8 = 0.834
-PLANCK_S8_SIGMA = 0.016
-PLANCK_OMEGA_M = 0.315
+# Import centralized constants (SSOT)
+from config.constants import (
+    PLANCK_S8,
+    PLANCK_S8_SIGMA,
+    PLANCK_OMEGA_M,
+    PLANCK_H0,
+    SPEED_OF_LIGHT_KM_S,
+    HORIZON_SIZE_TODAY_MPC
+)
 
 
 class DESBinData:
@@ -142,8 +147,8 @@ def estimate_s8_from_correlation_functions(bins_data: Dict[int, DESBinData]) -> 
 def calculate_angular_to_comoving_scale(
     theta_arcmin: float,
     z_eff: float,
-    h0: float = 67.36,
-    omega_m: float = 0.315
+    h0: float = None,
+    omega_m: float = None
 ) -> float:
     """
     Convert angular scale to comoving scale.
@@ -159,11 +164,17 @@ def calculate_angular_to_comoving_scale(
     Returns:
         Comoving scale in Mpc
     """
+    # Use centralized Planck values if not specified
+    if h0 is None:
+        h0 = PLANCK_H0
+    if omega_m is None:
+        omega_m = PLANCK_OMEGA_M
+
     # Convert to radians
     theta_rad = theta_arcmin * np.pi / 180.0 / 60.0
 
     # Speed of light
-    c = 299792.458  # km/s
+    c = SPEED_OF_LIGHT_KM_S  # Centralized constant
 
     # Hubble distance
     D_H = c / h0  # Mpc
@@ -190,7 +201,7 @@ def determine_optimal_resolution(scale_mpc: float) -> int:
     Returns:
         N_bits: Optimal resolution bits
     """
-    R_H = 14000.0  # Horizon at a ≈ 1
+    R_H = HORIZON_SIZE_TODAY_MPC  # Centralized constant
     delta_r_target = scale_mpc / 20.0
 
     N_exact = np.log2(R_H / delta_r_target)
@@ -264,7 +275,7 @@ def simulate_multiresolution_refinement_on_bin(
         delta_T = 0.3 * np.exp(-0.25 * (N - 8))
 
         # Cell size at this resolution
-        cell_size_mpc = 14000 / (2**N)
+        cell_size_mpc = HORIZON_SIZE_TODAY_MPC / (2**N)
 
         history.append({
             'resolution_bits': N,

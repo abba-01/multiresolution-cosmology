@@ -47,10 +47,15 @@ import sys
 HSC_S8_PUBLISHED = 0.780
 HSC_S8_SIGMA = 0.033
 
-# Planck 2018 cosmology for comparison
-PLANCK_S8 = 0.834
-PLANCK_S8_SIGMA = 0.016
-PLANCK_OMEGA_M = 0.315
+# Import centralized constants (SSOT)
+from config.constants import (
+    PLANCK_S8,
+    PLANCK_S8_SIGMA,
+    PLANCK_OMEGA_M,
+    PLANCK_H0,
+    SPEED_OF_LIGHT_KM_S,
+    HORIZON_SIZE_TODAY_MPC
+)
 
 
 class HSCBinData:
@@ -135,12 +140,18 @@ def estimate_s8_from_correlation_functions(bins_data: Dict[int, HSCBinData]) -> 
 def calculate_angular_to_comoving_scale(
     theta_arcmin: float,
     z_eff: float,
-    h0: float = 67.36,
-    omega_m: float = 0.315
+    h0: float = None,
+    omega_m: float = None
 ) -> float:
     """Convert angular scale to comoving scale."""
+    # Use centralized Planck values if not specified
+    if h0 is None:
+        h0 = PLANCK_H0
+    if omega_m is None:
+        omega_m = PLANCK_OMEGA_M
+
     theta_rad = theta_arcmin * np.pi / 180.0 / 60.0
-    c = 299792.458  # km/s
+    c = SPEED_OF_LIGHT_KM_S  # Centralized constant
     D_H = c / h0
     D_A_approx = D_H * z_eff / (1 + z_eff) * (1 + 0.5 * omega_m * z_eff)
     scale_mpc = theta_rad * D_A_approx * (1 + z_eff)
@@ -210,7 +221,7 @@ def simulate_multiresolution_refinement_on_bin(
         base_corr = corrections_by_resolution.get(N, 0.020)
         correction = base_corr * z_scaling_factor
         delta_T = 0.3 * np.exp(-0.25 * (N - 8))
-        cell_size_mpc = 14000 / (2**N)
+        cell_size_mpc = HORIZON_SIZE_TODAY_MPC / (2**N)
 
         history.append({
             'resolution_bits': N,
