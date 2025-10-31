@@ -3,14 +3,22 @@
 KiDS-1000 Real Data Loader
 Load and parse KiDS-1000 cosmic shear data for validation
 
+REFACTORED: Now uses centralized SSOT configuration
+
 Data source: http://kids.strw.leidenuniv.nl/DR4/
 Reference: Asgari et al. 2021 (A&A 645, A104)
+
+Author: Eric D. Martin (All Your Baseline LLC)
+Date: 2025-10-30
 """
 
 import numpy as np
 from typing import Dict, List, Tuple, Optional
 from dataclasses import dataclass
 import os
+
+# Import centralized constants (SSOT)
+from config.surveys import KIDS_S8
 
 
 @dataclass
@@ -44,7 +52,7 @@ KIDS_Z_BINS = [
 ]
 
 # Published KiDS-1000 results (Asgari+ 2021)
-KIDS_S8_PUBLISHED = 0.759
+KIDS_S8_PUBLISHED = KIDS_S8
 KIDS_S8_SIGMA = 0.024
 
 

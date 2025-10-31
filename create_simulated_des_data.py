@@ -3,18 +3,25 @@
 Create Simulated DES-Y3 Data
 For cross-validation testing while awaiting real data access
 
+REFACTORED: Now uses centralized SSOT configuration
+
 Based on:
-- Published DES-Y3 S₈ = 0.776 ± 0.017
+- Published DES-Y3 S₈ (from centralized config)
 - Expected correlation function shape
 - 4 tomographic bins matching DES-Y3 structure
+
+Author: Eric D. Martin (All Your Baseline LLC)
+Date: 2025-10-30
 """
 
 import numpy as np
 import json
 
+# Import centralized constants (SSOT)
+from config.surveys import DES_S8
 
 # DES-Y3 configuration
-DES_S8_PUBLISHED = 0.776
+DES_S8_PUBLISHED = DES_S8
 DES_S8_SIGMA = 0.017
 
 # Tomographic bins (z ranges)
@@ -31,7 +38,7 @@ THETA_MAX = 250.0
 N_THETA_BINS = 20
 
 
-def generate_correlation_function(theta_arcmin, z_eff, S8=0.776):
+def generate_correlation_function(theta_arcmin, z_eff, S8=None):
     """
     Generate realistic-looking cosmic shear correlation function.
 
@@ -43,11 +50,13 @@ def generate_correlation_function(theta_arcmin, z_eff, S8=0.776):
     Args:
         theta_arcmin: Angular scales in arcminutes
         z_eff: Effective redshift
-        S8: Structure growth parameter
+        S8: Structure growth parameter (defaults to DES published value)
 
     Returns:
         (xi_plus, xi_minus)
     """
+    if S8 is None:
+        S8 = DES_S8_PUBLISHED
 
     # Convert to dimensionless scale
     theta_norm = theta_arcmin / 10.0  # Normalize to 10 arcmin

@@ -3,17 +3,24 @@
 Create Simulated HSC-Y3 Data
 For cross-validation testing while awaiting real data access
 
+REFACTORED: Now uses centralized SSOT configuration
+
 Based on:
-- Published HSC-Y3 S₈ = 0.780 ± 0.033
+- Published HSC-Y3 S₈ (from centralized config)
 - 4 tomographic bins (z = 0.3-1.5)
+
+Author: Eric D. Martin (All Your Baseline LLC)
+Date: 2025-10-30
 """
 
 import numpy as np
 import json
 
+# Import centralized constants (SSOT)
+from config.surveys import HSC_S8
 
 # HSC-Y3 configuration
-HSC_S8_PUBLISHED = 0.780
+HSC_S8_PUBLISHED = HSC_S8
 HSC_S8_SIGMA = 0.033
 
 # Tomographic bins (z ranges)
@@ -30,10 +37,21 @@ THETA_MAX = 300.0
 N_THETA_BINS = 18
 
 
-def generate_correlation_function(theta_arcmin, z_eff, S8=0.780):
+def generate_correlation_function(theta_arcmin, z_eff, S8=None):
     """
     Generate realistic HSC cosmic shear correlation function.
+
+    Args:
+        theta_arcmin: Angular scales in arcminutes
+        z_eff: Effective redshift
+        S8: Structure growth parameter (defaults to HSC published value)
+
+    Returns:
+        (xi_plus, xi_minus)
     """
+    if S8 is None:
+        S8 = HSC_S8_PUBLISHED
+
     theta_norm = theta_arcmin / 10.0
     amplitude = (S8 / 0.8)**2 * (1 + z_eff)**0.5 * 1e-3
 
