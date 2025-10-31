@@ -5,6 +5,8 @@ TRGB Validation Test - Real Data Point
 Testing multi-resolution UHA refinement on actual TRGB anchor from
 Carnegie-Chicago Hubble Program (Freedman et al. 2021).
 
+REFACTORED: Now uses centralized SSOT configuration
+
 Author: Eric D. Martin (All Your Baseline LLC)
 Date: 2025-10-30
 """
@@ -12,6 +14,9 @@ Date: 2025-10-30
 import numpy as np
 import json
 from pathlib import Path
+
+# Import centralized constants (SSOT)
+from config.constants import TRGB_H0, TRGB_H0_SIGMA, PLANCK_H0, SHOES_H0
 
 # TRGB Anchor Specification (from user input)
 TRGB_ANCHOR = {
@@ -93,11 +98,11 @@ def predict_trgb_convergence():
     print("="*80 + "\n")
 
     # Current TRGB measurement
-    H0_trgb_raw = 69.8
+    H0_trgb_raw = TRGB_H0
     sigma_trgb_raw = 1.9
 
     # Planck measurement
-    H0_planck = 67.36
+    H0_planck = PLANCK_H0
     sigma_planck = 0.54
 
     # Initial tension
@@ -187,7 +192,7 @@ def compare_trgb_to_shoes():
 
     # SH0ES: Local scale (~30 Mpc, but dominated by <20 Mpc anchors)
     shoes_scale_mpc = 20
-    shoes_H0_raw = 73.04
+    shoes_H0_raw = SHOES_H0
     shoes_H0_corrected = 68.5
     shoes_shift = shoes_H0_corrected - shoes_H0_raw
 
@@ -250,7 +255,7 @@ def generate_trgb_test_specification():
             "n_galaxies": 18,
             "distance_range_mpc": [5, 40],
             "H0_measurement": {
-                "value": 69.8,
+                "value": TRGB_H0,
                 "uncertainty": 1.9,
                 "units": "km/s/Mpc"
             }

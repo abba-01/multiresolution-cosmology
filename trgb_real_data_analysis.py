@@ -7,6 +7,8 @@ using multi-resolution UHA tensor calibration.
 
 Prediction: H₀ = 68.5 ± 1.5 km/s/Mpc (from current 69.8 ± 1.9 km/s/Mpc)
 
+REFACTORED: Now uses centralized SSOT configuration
+
 Author: Eric D. Martin (All Your Baseline LLC)
 Date: 2025-10-30
 """
@@ -31,6 +33,9 @@ try:
 except ImportError:
     print("Warning: multiresolution_uha_encoder not available")
     ENCODER_AVAILABLE = False
+
+# Import centralized constants (SSOT)
+from config.constants import TRGB_H0, PLANCK_H0, PLANCK_OMEGA_M
 
 
 # ============================================================================
@@ -62,14 +67,14 @@ TRGB_GALAXIES = [
 
 # Planck 2018 parameters for comparison
 PLANCK_PARAMS = {
-    'H0': 67.36,
+    'H0': PLANCK_H0,
     'sigma_H0': 0.54,
-    'Omega_m': 0.315,
+    'Omega_m': PLANCK_OMEGA_M,
     'Omega_lambda': 0.685,
 }
 
 # Published TRGB H0
-TRGB_H0_PUBLISHED = 69.8
+TRGB_H0_PUBLISHED = TRGB_H0
 TRGB_SIGMA_PUBLISHED = 1.9
 
 # Prediction from multi-resolution analysis
