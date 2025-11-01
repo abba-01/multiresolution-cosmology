@@ -67,3 +67,8 @@ htmlcov/
 Thumbs.db
 *uha_encoder.py
 multiresolution_uha_encoder.py
+
+# Joomla components (deployed elsewhere)
+joomla/
+com_uha/
+*com_uha*.zip

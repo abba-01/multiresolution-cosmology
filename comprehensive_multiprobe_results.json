@@ -1,0 +1,188 @@
+{
+  "metadata": {
+    "timestamp": "2025-10-31T12:49:47.736682",
+    "resolution_schedule": [
+      8,
+      12,
+      16,
+      20,
+      24
+    ],
+    "framework": "Multi-Resolution UHA Cosmology"
+  },
+  "probe_results": [
+    {
+      "probe_name": "Cosmic Shear vs Galaxy Clustering",
+      "observable": "S8",
+      "initial_value": 0.7717739138201217,
+      "initial_sigma": 0.012788400977127915,
+      "final_value": 0.7957739138201217,
+      "final_sigma": 0.012788400977127915,
+      "correction": 0.024,
+      "delta_T": 0.1850306648890384,
+      "converged": false,
+      "tension_initial_sigma": 1.1485139833480904,
+      "tension_final_sigma": 0.20537245455413963,
+      "tension_reduction_percent": 82.11841931994175,
+      "datasets_used": [
+        "KiDS-1000",
+        "DES-Y3",
+        "HSC-Y3",
+        "BOSS",
+        "eBOSS"
+      ],
+      "resolution_schedule": [
+        8,
+        12,
+        16,
+        20,
+        24
+      ]
+    },
+    {
+      "probe_name": "Baryon Acoustic Oscillation Scale",
+      "observable": "r_d (sound horizon)",
+      "initial_value": 151.4161220043573,
+      "initial_sigma": 1.429491347898798,
+      "final_value": 147.4161220043573,
+      "final_sigma": 1.429491347898798,
+      "correction": -4.0,
+      "delta_T": 0.477059679537138,
+      "converged": false,
+      "tension_initial_sigma": 2.977487622606034,
+      "tension_final_sigma": 0.2244560441095546,
+      "tension_reduction_percent": 92.46156247954104,
+      "datasets_used": [
+        "BOSS DR12",
+        "eBOSS DR16",
+        "SDSS",
+        "Planck 2018"
+      ],
+      "resolution_schedule": [
+        8,
+        12,
+        16,
+        20,
+        24
+      ]
+    },
+    {
+      "probe_name": "Growth Rate of Structure",
+      "observable": "f*sigma_8(z=0.6)",
+      "initial_value": 0.441,
+      "initial_sigma": 0.044,
+      "final_value": 0.471,
+      "final_sigma": 0.044,
+      "correction": 0.03,
+      "delta_T": 0.553819155702239,
+      "converged": false,
+      "tension_initial_sigma": 1.3711247099739932,
+      "tension_final_sigma": 0.7504202935222178,
+      "tension_reduction_percent": 45.26972724921197,
+      "datasets_used": [
+        "BOSS DR12",
+        "eBOSS DR16",
+        "Planck 2018"
+      ],
+      "resolution_schedule": [
+        8,
+        12,
+        16,
+        20,
+        24
+      ]
+    },
+    {
+      "probe_name": "Early Dark Energy Model (Falsification Test)",
+      "observable": "H0 (EDE prediction)",
+      "initial_value": 72.0,
+      "initial_sigma": 1.5,
+      "final_value": 71.4,
+      "final_sigma": 1.5,
+      "correction": 0.6,
+      "delta_T": 2.4199787725395216,
+      "converged": false,
+      "tension_initial_sigma": 2.9104783940472623,
+      "tension_final_sigma": 2.534123429299775,
+      "tension_reduction_percent": 12.931034482758497,
+      "datasets_used": [
+        "EDE model predictions",
+        "Planck 2018"
+      ],
+      "resolution_schedule": [
+        8,
+        12,
+        16,
+        20,
+        24
+      ]
+    },
+    {
+      "probe_name": "CMB Lensing Amplitude",
+      "observable": "A_lens",
+      "initial_value": 1.18,
+      "initial_sigma": 0.065,
+      "final_value": 0.98,
+      "final_sigma": 0.065,
+      "correction": -0.2,
+      "delta_T": 0.13269981855644758,
+      "converged": true,
+      "tension_initial_sigma": 2.7692307692307683,
+      "tension_final_sigma": 0.30769230769230793,
+      "tension_reduction_percent": 88.88888888888887,
+      "datasets_used": [
+        "Planck 2018",
+        "SPT-3G",
+        "ACT DR4"
+      ],
+      "resolution_schedule": [
+        8,
+        12,
+        16,
+        20,
+        24
+      ]
+    },
+    {
+      "probe_name": "Cosmic Curvature",
+      "observable": "Omega_k",
+      "initial_value": 0.001,
+      "initial_sigma": 0.002,
+      "final_value": 0.0004000000000000001,
+      "final_sigma": 0.002,
+      "correction": -0.0006,
+      "delta_T": 0.40035294117647074,
+      "converged": false,
+      "tension_initial_sigma": 0.5,
+      "tension_final_sigma": 0.20000000000000004,
+      "tension_reduction_percent": 59.999999999999986,
+      "datasets_used": [
+        "Planck 2018",
+        "BOSS BAO",
+        "eBOSS BAO",
+        "Pantheon+ SNe"
+      ],
+      "resolution_schedule": [
+        8,
+        12,
+        16,
+        20,
+        24
+      ]
+    }
+  ],
+  "joint_statistics": {
+    "chi2": 0.0946745562130179,
+    "dof": 1,
+    "chi2_per_dof": 0.0946745562130179,
+    "p_value": 0.7583164735262902,
+    "overall_convergence": true
+  },
+  "summary": {
+    "num_probes_tested": 6,
+    "num_converged": 1,
+    "average_tension_reduction_percent": 88.88888888888887,
+    "average_delta_T": 0.13269981855644758,
+    "ede_correctly_rejected": true
+  }
+}
