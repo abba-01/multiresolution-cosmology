@@ -162,50 +162,46 @@ Convergence metric: **ΔT < 0.15** indicates systematic origin (not fundamental 
 
 ---
 
+## 📚 UHA API Documentation
+
+**Complete UHA API documentation is available at:**
+
+👉 **[github.com/abba-01/uha-blackbox](https://github.com/abba-01/uha-blackbox)**
+
+**Quick Links:**
+- **[API Specification](https://github.com/abba-01/uha-blackbox/blob/master/docs/API_SPECIFICATION.md)** - Complete REST API reference
+- **[Integration Guide](https://github.com/abba-01/uha-blackbox/blob/master/docs/INTEGRATION_GUIDE.md)** - Python, PHP, JavaScript, R examples
+- **[Troubleshooting](https://github.com/abba-01/uha-blackbox/blob/master/docs/TROUBLESHOOTING.md)** - Common issues and solutions
+
+---
+
 ## Usage Example
 
 ### Using the UHA API
 
 ```python
-import requests
+from uha_client import UHAClient
 
-# Get your API key from https://api.aybllc.org/signup
-API_KEY = "your_api_key_here"
-
-def encode_position(ra_deg, dec_deg, distance_mpc, resolution_bits):
-    """Encode position using UHA API"""
-    response = requests.post(
-        'https://api.aybllc.org/v1/uha/encode',
-        json={
-            'ra_deg': ra_deg,
-            'dec_deg': dec_deg,
-            'distance_mpc': distance_mpc,
-            'resolution_bits': resolution_bits,
-            'scale_factor': 1.0,
-            'cosmo_params': {
-                'h0': 67.36,
-                'omega_m': 0.315,
-                'omega_lambda': 0.685
-            }
-        },
-        headers={'Authorization': f'Bearer {API_KEY}'}
-    )
-    return response.json()
+# Initialize client (get token from admin@got.gitgap.org)
+client = UHAClient(
+    base_url="https://got.gitgap.org/v1",
+    token="uha.admin.YOUR_TOKEN_HERE"
+)
 
 # Encode NGC 4258 maser at 32-bit resolution
-result = encode_position(
-    ra_deg=184.74,
-    dec_deg=47.30,
-    distance_mpc=7.60,
+result = client.encode(
+    ra=184.74,
+    dec=47.30,
+    distance=7.60,
     resolution_bits=32
 )
 
-print(f"UHA Code: {result['uha_code']}")
+print(f"UHA Address: {result['uha_address']}")
 print(f"Cell size: {result['cell_size_mpc'] * 1000:.1f} pc")
 # Output: Cell size: 3.3 pc
 ```
 
-See [UHA_API_NOTICE.md](UHA_API_NOTICE.md) for full API documentation.
+**For complete API documentation, see [uha-blackbox repository](https://github.com/abba-01/uha-blackbox/blob/master/docs/API_SPECIFICATION.md).**
 
 ---
 
